@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const Nav = () => {
   const [isLogin, setIsLogin] = useState(false);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    localStorage.setItem('token', 'token');
+    localStorage.setItem("token", "token");
     if (token) {
       setIsLogin(true);
     } else {
@@ -17,16 +17,16 @@ const Nav = () => {
 
   return (
     <HeaderContainer>
-      <LogoText to='/'>ai 멘토 머시기</LogoText>
+      <LogoText to="/">ai 멘토 머시기</LogoText>
       <div>
         {isLogin ? (
           <Row>
             <p>아리 님 환영합니다</p>
             <Button
-              type='button'
+              type="button"
               onClick={() => {
                 localStorage.clear();
-                window.location.href = '/';
+                window.location.href = "/";
               }}
             >
               로그아웃
@@ -36,8 +36,8 @@ const Nav = () => {
           <Row>
             <Button
               onClick={() => {
-                localStorage.setItem('token', 'token');
-                window.location.href = '/';
+                localStorage.setItem("token", "token");
+                window.location.href = "/";
               }}
             >
               로그인
