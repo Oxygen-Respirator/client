@@ -1,0 +1,57 @@
+name: Front-End CI
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          # node-version: ${{ matrix.node-version }} 버전별 빌드도 가능함
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+          cache: "yarn"
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+      #       # https://github.com/docker/build-push-action
+      # docker 시작
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_ID }}
+          password: ${{ secrets.DOCKER_PW }} # password란에 token 입력
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: . # base folder
+          file: ./Dockerfile # Dockerfile path
+          platforms: linux/amd64 # m1에서는 - linux/arm64/v8
+          push: true # github 저장소 명으로 도커 imagename 설정
+          tags: ojy9612/${{ github.event.repository.name }}:1.0 # username/imagename:tagname  tagname 생략 시 latest로 입력됨.

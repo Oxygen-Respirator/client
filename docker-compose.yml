@@ -1,0 +1,11 @@
+version: "3.3"
+services:
+  web:
+    platform: linux/amd64
+    image: rmodev/rmo-voyage-front
+    container_name: rmo-voyage-front
+    ports:
+      - "43000:43000"
+    restart: always
+    environment:
+      - TZ=Asia/Seoul
