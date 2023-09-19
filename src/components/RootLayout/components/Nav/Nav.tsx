@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { signUpModalOpenAtom } from "@/atom/modal";
+import { deleteCookie, getCookie, setCookie } from "@/utils/cookie";
 
 const Nav = () => {
+  const setSignUpModalOpen = useSetRecoilState(signUpModalOpenAtom);
   const [isLogin, setIsLogin] = useState(false);
-  const token = localStorage.getItem("token");
+  const token = getCookie("token");
+  const expirationTime = new Date();
 
   useEffect(() => {
-    localStorage.setItem("token", "token");
     if (token) {
       setIsLogin(true);
     } else {
@@ -25,8 +29,8 @@ const Nav = () => {
             <Button
               type="button"
               onClick={() => {
-                localStorage.clear();
-                window.location.href = "/";
+                deleteCookie("token");
+                location.href = "/";
               }}
             >
               로그아웃
@@ -36,13 +40,24 @@ const Nav = () => {
           <Row>
             <Button
               onClick={() => {
-                localStorage.setItem("token", "token");
-                window.location.href = "/";
+                expirationTime.setHours(expirationTime.getHours() + 24);
+                setCookie("token", "token", {
+                  path: "/",
+                  secure: true,
+                  expires: expirationTime,
+                });
+                location.href = "/";
               }}
             >
               로그인
             </Button>
-            <Button>회원가입</Button>
+            <Button
+              onClick={() => {
+                setSignUpModalOpen(true);
+              }}
+            >
+              회원가입
+            </Button>
           </Row>
         )}
       </div>
