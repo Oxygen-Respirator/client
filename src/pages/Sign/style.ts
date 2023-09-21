@@ -1,9 +1,8 @@
 import { styled } from "styled-components";
 
-styled;
-
 export const Input = styled.input`
   border: 1px solid ${({ theme: { color } }) => color.borderColor};
+  border-radius: ${({ theme: { border } }) => border.defaultRadius};
   display: block;
   width: 100%;
 `;
@@ -13,13 +12,18 @@ export const Form = styled.form`
   max-width: 400px;
 `;
 
-export const Button = styled.button<{ $reverse?: boolean }>`
-  background: ${({ theme: { color }, $reverse }) =>
-    $reverse ? "" : color.mainColor};
-  color: ${({ theme: { color }, $reverse }) =>
-    $reverse ? color.mainColor : "white"};
-  border-color: ${({ theme: { color }, $reverse }) =>
-    $reverse ? color.mainColor : "none"};
+export const Button = styled.button<{
+  $reverse?: boolean;
+  $isDisable?: boolean;
+}>`
+  background: ${({ theme: { color }, $reverse, $isDisable }) => {
+    return $isDisable ? color.borderColor : $reverse ? "" : color.mainColor;
+  }};
+  color: ${({ theme: { color }, $reverse, $isDisable }) =>
+    $isDisable ? "white" : $reverse ? color.mainColor : "white"};
+  border-color: ${({ theme: { color }, $reverse, $isDisable }) =>
+    $isDisable ? "white" : $reverse ? color.mainColor : "none"};
+  border-radius: ${({ theme: { border } }) => border.defaultRadius};
   border: 1px solid;
   display: block;
   text-align: center;

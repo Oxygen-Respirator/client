@@ -5,6 +5,10 @@ const signApis = {
     const result = await instance.post("user/login", data);
     return result;
   },
+  up: async (data: SignUp) => {
+    const result = await instance.post("user/sign-up", data);
+    return result;
+  },
 };
 
 export default signApis;
