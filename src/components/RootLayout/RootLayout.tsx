@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { Outlet } from 'react-router-dom';
-import Nav from './components/Nav/Nav';
-import SideBar from './components/SideBar';
+import styled from "styled-components";
+import { Outlet } from "react-router-dom";
+import Nav from "./components/Nav";
+import SideBar from "./components/SideBar";
 
-const index = () => {
+const RootLayout = () => {
   return (
     <RootContainer>
       <Nav />
@@ -15,7 +15,7 @@ const index = () => {
   );
 };
 
-export default index;
+export default RootLayout;
 
 const RootContainer = styled.div`
   width: 100vw;

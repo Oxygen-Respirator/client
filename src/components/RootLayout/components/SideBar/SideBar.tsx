@@ -1,7 +1,17 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const index = () => {
-  const SUBJECT_LIST = ['Java', 'JavaScript', 'Kotlin', 'React', 'Next.js', 'Node.js', 'Nest.js', 'Spring', 'CS'];
+const SideBar = () => {
+  const SUBJECT_LIST = [
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Nest.js",
+    "Spring",
+    "CS",
+  ];
 
   return (
     <SideBarContainer>
@@ -9,7 +19,7 @@ const index = () => {
         <div>
           <TitleText>💻개발 공부 분야 선택</TitleText>
           <select>
-            {SUBJECT_LIST.map((sbj) => (
+            {SUBJECT_LIST.map(sbj => (
               <option value={sbj}>{sbj}</option>
             ))}
           </select>
@@ -19,7 +29,7 @@ const index = () => {
   );
 };
 
-export default index;
+export default SideBar;
 
 const TitleText = styled.p`
   margin-bottom: 1rem;
