@@ -1,18 +1,50 @@
+import { useState } from "react";
 import styled from "styled-components";
+// import { ReactComponent as AIProfile } from "@/assets/AIProfile.svg";
 
 const Chat = () => {
+  const [selectdSbj, setSelectedSbj] = useState<string>("Java");
+
+  const SUBJECT_LIST = [
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Nest.js",
+    "Spring",
+    "CS",
+  ];
+
   return (
     <ChatContainer>
       <MessageWrap>
         <AIContainrer>
           <Row>
-            <ProfileImgWrap>
-              <ProfileImg
-                src="https://avatars.githubusercontent.com/u/88040809?v=4"
-                alt="프로필"
-              />
-            </ProfileImgWrap>
-            <p>아리의 ai 멘토</p>
+            <ProfileImgWrap>{/* <AIProfile /> */}</ProfileImgWrap>
+            <p>AI 면접 멘토</p>
+          </Row>
+
+          <AIMessageWrap>모의면접 학습할 주제를 선택해주세요.</AIMessageWrap>
+          <SubjectItemWrap>
+            {SUBJECT_LIST.map(sbj => (
+              <SubjectItem
+                key={sbj}
+                onClick={() => {
+                  setSelectedSbj(sbj);
+                }}
+                selectdSbj={!!(selectdSbj === sbj)}
+              >
+                {sbj}
+              </SubjectItem>
+            ))}
+          </SubjectItemWrap>
+        </AIContainrer>
+        <AIContainrer>
+          <Row>
+            <ProfileImgWrap>{/* <AIProfile /> */}</ProfileImgWrap>
+            <p>AI 면접 멘토</p>
           </Row>
 
           <AIMessageWrap>
@@ -50,24 +82,20 @@ const Chat = () => {
         </RowEnd>
         <AIContainrer>
           <Row>
-            <ProfileImgWrap>
-              <ProfileImg
-                src="https://avatars.githubusercontent.com/u/88040809?v=4"
-                alt="프로필"
-              />
-            </ProfileImgWrap>
+            <ProfileImgWrap>{/* <AIProfile /> */}</ProfileImgWrap>
             <p>아리의 ai 멘토</p>
           </Row>
-
           <AIMessageWrap>
             Virtual DOM이란 무엇인가요? 왜 사용하나요?
           </AIMessageWrap>
         </AIContainrer>
       </MessageWrap>
-
       <ChatWrap>
         <CustomTextarea />
-        <Button>전송</Button>
+        <ChatSendBtnWrap>
+          <p>남은 답변 횟수 7/10</p>
+          <ChatSendBtn>전송</ChatSendBtn>
+        </ChatSendBtnWrap>
       </ChatWrap>
     </ChatContainer>
   );
@@ -91,19 +119,15 @@ const MessageWrap = styled.div`
     display: none;
   }
   padding: 1rem;
-  padding-bottom: 100px;
+  padding-bottom: 150px;
 `;
 
 const ProfileImgWrap = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 100%;
   overflow: hidden;
-`;
-const ProfileImg = styled.img`
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
+  background-color: ${({ theme: { color } }) => color.mainColor};
 `;
 
 const AIContainrer = styled.div`
@@ -125,17 +149,18 @@ const RowEnd = styled.div`
 const MyMessageWrap = styled.div`
   width: 60%;
   padding: 2rem;
-  background-color: #f1f7ff;
+  background-color: #fefcf4;
   border-radius: 0.75rem 0.75rem 0 0.75rem;
   line-height: 180%;
 `;
 const AIMessageWrap = styled.div`
   width: 30%;
-  padding: 2rem;
-  background-color: #6944ff;
-  color: #fff;
+  min-width: 470px;
+  padding: 1rem 2rem;
+  background-color: ${({ theme: { color } }) => color.subColor};
   border-radius: 0.75rem 0.75rem 0.75rem 0;
   line-height: 180%;
+  margin-top: 1.5rem;
 `;
 
 const ChatWrap = styled.div`
@@ -157,11 +182,19 @@ const CustomTextarea = styled.textarea`
   width: 100%;
   border: 0;
   height: 100px;
+  resize: none;
   &::-webkit-scrollbar {
     display: none;
   }
 `;
-const Button = styled.button`
+
+const ChatSendBtnWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const ChatSendBtn = styled.button`
   width: 100px;
   padding: 0.5rem 1rem;
   display: flex;
@@ -174,4 +207,23 @@ const Button = styled.button`
   background-color: #fff;
   font-size: 0.9rem;
   font-weight: bold;
+`;
+
+const SubjectItem = styled.button<{ selectdSbj: boolean }>`
+  padding: 0.5rem 1rem;
+  border: 1px solid
+    ${({ theme: { color }, selectdSbj }) =>
+      selectdSbj ? color.mainColor : color.borderColor};
+  color: ${({ theme: { color }, selectdSbj }) => selectdSbj && color.mainColor};
+  border-radius: 10px;
+  font-weight: bold;
+  width: 130px;
+`;
+
+const SubjectItemWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  margin-top: 1.5rem;
+  width: 800px;
 `;
