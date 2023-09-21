@@ -1,6 +1,8 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const SideBar = () => {
+  const [selectdSbj, setSelectedSbj] = useState<string>("Java");
   const SUBJECT_LIST = [
     "Java",
     "JavaScript",
@@ -18,11 +20,18 @@ const SideBar = () => {
       <div>
         <div>
           <TitleText>💻개발 공부 분야 선택</TitleText>
-          <select>
+          <SubjectList>
             {SUBJECT_LIST.map(sbj => (
-              <option value={sbj}>{sbj}</option>
+              <SubjectItem
+                onClick={() => {
+                  setSelectedSbj(sbj);
+                }}
+                selectdSbj={!!(selectdSbj === sbj)}
+              >
+                {sbj}
+              </SubjectItem>
             ))}
-          </select>
+          </SubjectList>
         </div>
       </div>
     </SideBarContainer>
@@ -32,7 +41,7 @@ const SideBar = () => {
 export default SideBar;
 
 const TitleText = styled.p`
-  margin-bottom: 1rem;
+  margin-top: 1rem;
 `;
 
 const SideBarContainer = styled.div`
@@ -40,7 +49,20 @@ const SideBarContainer = styled.div`
   min-width: 220px;
   height: 100%;
   border-radius: 0.75rem;
-  background-color: #f1f7ff;
+  background-color: #f7f8fa;
   box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
   padding: 2rem;
+`;
+const SubjectList = styled.ul`
+  margin-top: 2rem;
+`;
+
+const SubjectItem = styled.li<{ selectdSbj: boolean }>`
+  padding: 1rem;
+  background-color: ${({ selectdSbj }) => selectdSbj && "#3C71FE"};
+  font-weight: ${({ selectdSbj }) => selectdSbj && "bold"};
+  color: ${({ selectdSbj }) => selectdSbj && "#fff"};
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
 `;
