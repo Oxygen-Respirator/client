@@ -2,8 +2,10 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import { Button, Input, SignWrap } from "../style";
 import { useSignUpMutation } from "../signHook/signMutationHook";
+import { useNavigate } from "react-router-dom";
 
-export default function Sign() {
+export default function SignUp() {
+  const navigate = useNavigate();
   const [signUp, setSignUp] = useState<SignUp>({
     userId: "",
     userPw: "",
@@ -70,7 +72,13 @@ export default function Sign() {
           <SignUpButton $isDisable={isDisable} disabled={isDisable}>
             가입하기
           </SignUpButton>
-          <SignUpButton $reverse={true} type="button">
+          <SignUpButton
+            $reverse={true}
+            type="button"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
             취소
           </SignUpButton>
         </BtnWrap>
