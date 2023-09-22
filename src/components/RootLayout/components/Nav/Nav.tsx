@@ -18,7 +18,7 @@ const Nav = () => {
       setIsLogin(true)
     }
     
-  }, []);
+  }, [isSignModal]);
 
   return (
     <HeaderContainer>
