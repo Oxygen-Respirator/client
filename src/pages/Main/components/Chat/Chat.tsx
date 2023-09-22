@@ -121,6 +121,9 @@ const ChatContainer = styled.div`
   @media screen and (max-width: 768px) {
     padding: 2rem;
   }
+  @media screen and (max-width: 400px) {
+    padding: 1rem;
+  }
 `;
 
 const MessageWrap = styled.div`
@@ -135,6 +138,7 @@ const MessageWrap = styled.div`
 const DateText = styled.p`
   width: 100%;
   text-align: center;
+  margin-bottom: 1rem;
 `;
 const ProfileImgWrap = styled.div`
   display: flex;
