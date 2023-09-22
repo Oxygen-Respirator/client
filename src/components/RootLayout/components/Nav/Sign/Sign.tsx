@@ -77,20 +77,29 @@ export default function Sign({
           },
         },
       );
-
-      // if (status === 200) {
-      //   const { headers } = response;
-      //   localStorage.setItem("ptToken", headers.authorization);
-      //   setIsSignModal(prev => ({ ...prev, in: false }));
-      // }
     } else {
       const { userPw } = register;
+
       if (userPw !== confirmPw) {
         alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         return;
       }
-      const { data } = await signUpSubmit({ userId, userPw, userNickname });
-      console.log(data);
+
+      await signUpSubmit(
+        { userId, userPw, userNickname },
+        {
+          onSuccess: () => {
+            alert("정상 처리 되었습니다.");
+            setIsSignModal({ up: false, in: true });
+          },
+          onError: error => {
+            if (error instanceof AxiosError) {
+              const { response } = error;
+              alert(response?.data.message);
+            }
+          },
+        },
+      );
     }
   };
 
