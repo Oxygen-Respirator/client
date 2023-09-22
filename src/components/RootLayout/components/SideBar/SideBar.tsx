@@ -15,16 +15,10 @@ const SideBar = () => {
   return (
     <SideBarContainer>
       <div>
-        <div>
-          <TitleText>아리(Ari)의 학습정보</TitleText>
-          <Myinfo>답변 수: 235개</Myinfo>
-        </div>
-        <div>
-          <TitleText>히스토리</TitleText>
-          {SUBJECT_LIST.map(sbj => (
-            <Myinfo key={sbj}>{sbj} 모의면접</Myinfo>
-          ))}
-        </div>
+        <TitleText>히스토리</TitleText>
+        {SUBJECT_LIST.map(sbj => (
+          <Myinfo key={sbj}>{sbj} 모의면접</Myinfo>
+        ))}
       </div>
     </SideBarContainer>
   );
