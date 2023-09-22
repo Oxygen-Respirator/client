@@ -21,11 +21,11 @@ const Nav = () => {
 
   return (
     <HeaderContainer>
-      <LogoText to="/">ai 멘토 머시기</LogoText>
+      <LogoText to="/">AI 면접 멘토</LogoText>
       <div>
         {isLogin ? (
           <Row>
-            <p>아리 님 환영합니다</p>
+            <p>아리(Ari) 님 반가워요!</p>
             <Button
               type="button"
               onClick={() => {
@@ -79,6 +79,8 @@ const HeaderContainer = styled.div`
 
 const LogoText = styled(Link)`
   font-weight: bold;
+  color: ${({ theme: { color } }) => color.mainColor};
+  font-size: 18px;
 `;
 
 const Button = styled.button`
