@@ -65,14 +65,7 @@ const Nav = () => {
                   setIsSignModal(prev => ({ ...prev, in: true }));
                 }}
               >
-                로그인
-              </Button>
-              <Button
-                onClick={() => {
-                  setIsSignModal(prev => ({ ...prev, up: true }));
-                }}
-              >
-                회원가입
+                로그인 / 회원가입
               </Button>
             </Row>
           )}
