@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-// import { ReactComponent as AIProfile } from "@/assets/AIProfile.svg";
+import { AiProfile } from "@/components/Svg";
 
 const Chat = () => {
   const [selectdSbj, setSelectedSbj] = useState<string>("Java");
@@ -22,7 +22,9 @@ const Chat = () => {
       <MessageWrap>
         <AIContainrer>
           <Row>
-            <ProfileImgWrap>{/* <AIProfile /> */}</ProfileImgWrap>
+            <ProfileImgWrap>
+              <AiProfile />
+            </ProfileImgWrap>
             <p>AI 면접 멘토</p>
           </Row>
 
@@ -34,7 +36,7 @@ const Chat = () => {
                 onClick={() => {
                   setSelectedSbj(sbj);
                 }}
-                selectdSbj={!!(selectdSbj === sbj)}
+                $selectdSbj={!!(selectdSbj === sbj)}
               >
                 {sbj}
               </SubjectItem>
@@ -43,7 +45,9 @@ const Chat = () => {
         </AIContainrer>
         <AIContainrer>
           <Row>
-            <ProfileImgWrap>{/* <AIProfile /> */}</ProfileImgWrap>
+            <ProfileImgWrap>
+              <AiProfile />
+            </ProfileImgWrap>
             <p>AI 면접 멘토</p>
           </Row>
 
@@ -82,7 +86,9 @@ const Chat = () => {
         </RowEnd>
         <AIContainrer>
           <Row>
-            <ProfileImgWrap>{/* <AIProfile /> */}</ProfileImgWrap>
+            <ProfileImgWrap>
+              <AiProfile />
+            </ProfileImgWrap>
             <p>아리의 ai 멘토</p>
           </Row>
           <AIMessageWrap>
@@ -123,6 +129,9 @@ const MessageWrap = styled.div`
 `;
 
 const ProfileImgWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 35px;
   height: 35px;
   border-radius: 100%;
@@ -209,12 +218,13 @@ const ChatSendBtn = styled.button`
   font-weight: bold;
 `;
 
-const SubjectItem = styled.button<{ selectdSbj: boolean }>`
+const SubjectItem = styled.button<{ $selectdSbj: boolean }>`
   padding: 0.5rem 1rem;
   border: 1px solid
-    ${({ theme: { color }, selectdSbj }) =>
-      selectdSbj ? color.mainColor : color.borderColor};
-  color: ${({ theme: { color }, selectdSbj }) => selectdSbj && color.mainColor};
+    ${({ theme: { color }, $selectdSbj }) =>
+      $selectdSbj ? color.mainColor : color.borderColor};
+  color: ${({ theme: { color }, $selectdSbj }) =>
+    $selectdSbj && color.mainColor};
   border-radius: 10px;
   font-weight: bold;
   width: 130px;
