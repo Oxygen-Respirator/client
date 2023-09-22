@@ -2,21 +2,12 @@ import instance from "./instance";
 
 const signApis = {
   in: async (data: SignIn) => {
-    try{
-      const result = await instance.post("user/login", data);
-      return result;
-    }catch(error){
-      return error
-    }
+    const result = await instance.post("user/login", data);
+    return result;
   },
   up: async (data: SignUp) => {
-    try{
-
-      const result = await instance.post("user/sign-up", data);
-      return result;
-    }catch(error){
-      return error
-    }
+    const result = await instance.post("user/sign-up", data);
+    return result;
   },
 };
 
