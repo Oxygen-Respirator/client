@@ -62,10 +62,13 @@ export default function Sign({
     e.preventDefault();
     const { userId, userPw, confirmPw, userNickname } = register;
     if (isInOpen) {
-      const result = await signInSubmit({ userId, userPw });
-      console.log()
-
-
+      const response = await signInSubmit({ userId, userPw });
+      const {status} =response;
+      if(status===200){
+        const {headers} = response;
+        localStorage.setItem('ptToken',headers.authorization)
+        setIsSignModal(prev=>({...prev,in:false}))
+      }
     } else {
       const { userPw } = register;
       if (userPw !== confirmPw) {
