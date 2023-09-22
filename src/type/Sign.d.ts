@@ -1,8 +1,14 @@
-interface Sign {
+interface Sign extends SignUp{
+  confirmPw: string;
+}
+
+interface SignUp extends SignIn{
+  userNickname: string;
+}
+
+interface SignIn{
   userId: string;
   userPw: string;
-  userNickname: string;
-  confirmPw: string;
 }
 
 interface IsSignModal {
