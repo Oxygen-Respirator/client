@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { deleteCookie, getCookie } from "@/utils/cookie";
 import Sign from "./Sign";
 
 const Nav = () => {
@@ -13,12 +12,21 @@ const Nav = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    const isToken = localStorage.getItem('ptToken');
-    if(isToken){
-      setIsLogin(true)
+    const isToken = localStorage.getItem("ptToken");
+    if (isToken) {
+      setIsLogin(true);
     }
-    
   }, [isSignModal]);
+
+  useEffect(() => {
+    const isToken = localStorage.getItem("ptToken");
+    isToken && setIsSignModal(prev => ({ ...prev, in: true }));
+  }, []);
+
+  const onClickLoginOutBtn = () => {
+    localStorage.removeItem("ptToken");
+    setIsLogin(false);
+  };
 
   return (
     <HeaderContainer>
@@ -27,13 +35,7 @@ const Nav = () => {
         {isLogin ? (
           <Row>
             <p>아리(Ari) 님 반가워요!</p>
-            <Button
-              type="button"
-              onClick={() => {
-                deleteCookie("token");
-                location.href = "/";
-              }}
-            >
+            <Button type="button" onClick={onClickLoginOutBtn}>
               로그아웃
             </Button>
           </Row>
