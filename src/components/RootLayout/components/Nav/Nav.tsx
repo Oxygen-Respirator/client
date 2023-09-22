@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { signUpModalOpenAtom } from "@/atom/modal";
-import { deleteCookie, getCookie, setCookie } from "@/utils/cookie";
-import { SignIn, SignUp } from "./Sign";
-import { SignWrap } from "./Sign/style";
+import { deleteCookie, getCookie } from "@/utils/cookie";
+import Sign from "./Sign";
 
 const Nav = () => {
-  const setSignUpModalOpen = useSetRecoilState(signUpModalOpenAtom);
+  const [isSignModal, setIsSignModal] = useState<IsSignModal>({
+    in: false,
+    up: false,
+  });
+
   const [isLogin, setIsLogin] = useState(false);
   const token = getCookie("token");
-  const expirationTime = new Date();
 
   useEffect(() => {
     if (token) {
@@ -42,20 +42,14 @@ const Nav = () => {
           <Row>
             <Button
               onClick={() => {
-                expirationTime.setHours(expirationTime.getHours() + 24);
-                setCookie("token", "token", {
-                  path: "/",
-                  secure: true,
-                  expires: expirationTime,
-                });
-                location.href = "/";
+                setIsSignModal(prev => ({ ...prev, in: true }));
               }}
             >
               로그인
             </Button>
             <Button
               onClick={() => {
-                setSignUpModalOpen(true);
+                setIsSignModal(prev => ({ ...prev, up: true }));
               }}
             >
               회원가입
@@ -63,12 +57,7 @@ const Nav = () => {
           </Row>
         )}
       </div>
-      {true && (
-        <SignWrap>
-          <SignIn />
-          <SignUp />
-        </SignWrap>
-      )}
+      {<Sign isSignModal={isSignModal} setIsSignModal={setIsSignModal} />}
     </HeaderContainer>
   );
 };

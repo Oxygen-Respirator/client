@@ -8,3 +8,8 @@ interface SignIn {
   userId: string;
   userPw: string;
 }
+
+interface IsSignModal {
+  in: boolean;
+  up: boolean;
+}

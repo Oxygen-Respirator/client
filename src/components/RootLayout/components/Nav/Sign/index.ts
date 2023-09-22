@@ -1,4 +1,3 @@
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import Sign from "./Sign";
 
-export { SignIn, SignUp };
+export default Sign;
