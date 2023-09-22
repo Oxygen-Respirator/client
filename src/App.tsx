@@ -10,6 +10,7 @@ interface Theme {
     mainColor: "#18CD8C";
     subColor: "#F4FEF6";
     borderColor: "#C1C1C1";
+    opacityBg: "rgba(0,0,0,0.2)";
   };
   border: {
     defaultRadius: "20px";
@@ -24,6 +25,7 @@ function App() {
       mainColor: "#18CD8C",
       subColor: "#F4FEF6",
       borderColor: "#C1C1C1",
+      opacityBg: "rgba(0,0,0,0.2)",
     },
     border: {
       defaultRadius: "20px",

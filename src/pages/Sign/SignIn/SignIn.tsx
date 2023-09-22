@@ -15,9 +15,9 @@ export default function SignIn() {
   const { mutateAsync: signInSubmit } = useSignInMutation();
 
   function onChangeInput({
-    target: { name, value },
+    target: { value, name },
   }: {
-    target: { name: string; value: string };
+    target: { value: string; name: string };
   }) {
     setSignIn(prev => ({ ...prev, [name]: value }));
   }

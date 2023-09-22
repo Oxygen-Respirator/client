@@ -1,10 +1,11 @@
-interface SignUp {
+interface Sign {
   userId: string;
   userPw: string;
   userNickname: string;
+  confirmPw: string;
 }
 
-interface SignIn {
-  userId: string;
-  userPw: string;
+interface IsSignModal {
+  in: boolean;
+  up: boolean;
 }
