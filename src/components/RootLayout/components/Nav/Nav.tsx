@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { LogoIcon, MyProfile } from "@/components/Svg";
 import Sign from "./Sign";
 import { LogoIcon } from "@/components/Svg";
 import { useGetUserInfoMutation } from "./authHook/authMutationHook";
@@ -61,7 +62,10 @@ const Nav = () => {
         <div>
           {isLogin ? (
             <Row>
-              <p>아리(Ari) 님 반가워요!</p>
+              <MyprofileWrap>
+                <MyProfile />
+                아리(Ari) 님 반가워요!
+              </MyprofileWrap>
               <Button type="button" onClick={onClickLoginOutBtn}>
                 로그아웃
               </Button>
@@ -104,7 +108,11 @@ const LogoIconWrap = styled(Link)`
   padding: 0 2rem;
   display: block;
 `;
-
+const MyprofileWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
 const Button = styled.button`
   padding: 0.5rem 1rem;
   display: flex;
