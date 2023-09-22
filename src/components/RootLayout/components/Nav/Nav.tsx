@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { deleteCookie } from "@/utils/cookie";
-import { LogoIcon } from "@/components/Svg";
 import Sign from "./Sign";
+import { LogoIcon } from "@/components/Svg";
 
 const Nav = () => {
   const params = useParams();
@@ -25,6 +24,16 @@ const Nav = () => {
     }
   }, [isSignModal]);
 
+  useEffect(() => {
+    const isToken = localStorage.getItem("ptToken");
+    isToken && setIsSignModal(prev => ({ ...prev, in: true }));
+  }, []);
+
+  const onClickLoginOutBtn = () => {
+    localStorage.removeItem("ptToken");
+    setIsLogin(false);
+  };
+
   return (
     <HeaderContainer>
       <LogoIconWrap to="/">
@@ -42,13 +51,7 @@ const Nav = () => {
           {isLogin ? (
             <Row>
               <p>아리(Ari) 님 반가워요!</p>
-              <Button
-                type="button"
-                onClick={() => {
-                  deleteCookie("token");
-                  location.href = "/";
-                }}
-              >
+              <Button type="button" onClick={onClickLoginOutBtn}>
                 로그아웃
               </Button>
             </Row>
@@ -72,6 +75,7 @@ const Nav = () => {
           )}
         </div>
       </RowBetwwen>
+
       {<Sign isSignModal={isSignModal} setIsSignModal={setIsSignModal} />}
     </HeaderContainer>
   );

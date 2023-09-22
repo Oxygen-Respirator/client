@@ -12,6 +12,7 @@ import {
   useSignInMutation,
   useSignUpMutation,
 } from "./signHook/signMutationHook";
+import { Axios, AxiosError } from "axios";
 
 export default function Sign({
   isSignModal,
@@ -30,53 +31,64 @@ export default function Sign({
     confirmPw: "",
   });
 
-  const [errorMsg,setErrorMsg] = useState("")
+  const [errorMsg, setErrorMsg] = useState("");
 
   const { mutateAsync: signUpSubmit } = useSignUpMutation();
   const { mutateAsync: signInSubmit } = useSignInMutation();
 
-  const onChangeInput =( name: keyof Sign)=>({
-    target: { value },
-  }: {
-    target: { value: string };
-  }) =>{
-    if(value===""){
-      setRegister(prev => ({ ...prev, [name]: value }));
-      return ;
-    }
-    if(name==='userNickname'&&register[name].length>7){
-      return;
-    }
-    if(register[name].length>11){
-      return;
-    }    
-    const regex = /^[a-zA-Z0-9]+$/;
-    const isValid = regex.test(value);
+  const onChangeInput =
+    (name: keyof Sign) =>
+    ({ target: { value } }: { target: { value: string } }) => {
+      if (value === "") {
+        setRegister(prev => ({ ...prev, [name]: value }));
+        return;
+      }
+      if (name === "userNickname" && register[name].length > 7) {
+        return;
+      }
+      if (register[name].length > 11) {
+        return;
+      }
+      const regex = /^[a-zA-Z0-9]+$/;
+      const isValid = regex.test(value);
 
-    if(isValid){ 
-      setRegister(prev => ({ ...prev, [name]: value }));
-    }
-  }
+      if (isValid) {
+        setRegister(prev => ({ ...prev, [name]: value }));
+      }
+    };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { userId, userPw, confirmPw, userNickname } = register;
     if (isInOpen) {
-      const response = await signInSubmit({ userId, userPw });
-      const {status} =response;
-      if(status===200){
-        const {headers} = response;
-        localStorage.setItem('ptToken',headers.authorization)
-        setIsSignModal(prev=>({...prev,in:false}))
-      }
+      await signInSubmit(
+        { userId, userPw },
+        {
+          onSuccess: data => {
+            if (data instanceof Axios) {
+            }
+          },
+          onError: error => {
+            if (error instanceof AxiosError) {
+              alert(error.response?.data?.message);
+            }
+          },
+        },
+      );
+
+      // if (status === 200) {
+      //   const { headers } = response;
+      //   localStorage.setItem("ptToken", headers.authorization);
+      //   setIsSignModal(prev => ({ ...prev, in: false }));
+      // }
     } else {
       const { userPw } = register;
       if (userPw !== confirmPw) {
         alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         return;
       }
-      const result = await signUpSubmit({ userId, userPw, userNickname });
-
+      const { data } = await signUpSubmit({ userId, userPw, userNickname });
+      console.log(data);
     }
   };
 
@@ -113,26 +125,26 @@ export default function Sign({
           <SignP>회원이 되면 모든 서비스를 이용하실 수 있습니다.</SignP>
         </div>
         <SignInput
-          onChange={onChangeInput('userNickname')}
+          onChange={onChangeInput("userNickname")}
           placeholder="닉네임 (영문 + 숫자 10자리)"
           $signIn={isInOpen}
           value={register.userNickname}
           type="text"
         />
         <SignInput
-          onChange={onChangeInput('userId')}
+          onChange={onChangeInput("userId")}
           placeholder="아이디 (영문 + 숫자 12자리)"
           value={register.userId}
           type="text"
         />
         <SignInput
-          onChange={onChangeInput('userPw')}
+          onChange={onChangeInput("userPw")}
           placeholder="비밀번호 (영문 + 숫자 12자리)"
           value={register.userPw}
           type="password"
         />
         <SignInput
-          onChange={onChangeInput('confirmPw')}
+          onChange={onChangeInput("confirmPw")}
           placeholder="비밀번호 확인 (영문 + 숫자 12자리)"
           $signIn={isInOpen}
           value={register.confirmPw}
