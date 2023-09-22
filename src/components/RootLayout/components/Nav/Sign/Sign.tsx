@@ -23,13 +23,12 @@ export default function Sign({
   const { up: isUpOpen, in: isInOpen } = isSignModal;
   const isModalOpen = isInOpen || isUpOpen;
 
-  const [register, setRegister] = useState<SignUp>({
+  const [register, setRegister] = useState<Sign>({
     userId: "",
     userPw: "",
     userNickname: "",
+    confirmPw: "",
   });
-
-  const [confirmPw, setConfirmPw] = useState<string>("");
 
   const { mutateAsync: signUpSubmit } = useSignUpMutation();
   const { mutateAsync: signInSubmit } = useSignInMutation();
@@ -44,8 +43,8 @@ export default function Sign({
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const { userId, userPw, confirmPw, userNickname } = register;
     if (isInOpen) {
-      const { userId, userPw } = register;
       const result = await signInSubmit({ userId, userPw });
       console.log(result);
     } else {
@@ -54,7 +53,7 @@ export default function Sign({
         alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         return;
       }
-      const result = await signUpSubmit(register);
+      const result = await signUpSubmit({ userId, userPw, userNickname });
       console.log(result);
     }
   };
@@ -68,8 +67,7 @@ export default function Sign({
   // });
   // location.href = "/";
 
-  const isUpDisable =
-    Object.values(register).some(_obj => _obj === "") || confirmPw === "";
+  const isUpDisable = Object.values(register).some(_obj => _obj === "");
 
   const isInDisable = !register.userId || !register.userPw;
 
@@ -78,8 +76,8 @@ export default function Sign({
       userId: "",
       userPw: "",
       userNickname: "",
+      confirmPw: "",
     });
-    setConfirmPw("");
   }, [isSignModal]);
 
   const onClickNotSubBtn = () => {
@@ -124,10 +122,11 @@ export default function Sign({
           type="password"
         />
         <SignInput
-          onChange={({ target: { value } }) => setConfirmPw(value)}
+          onChange={onChangeInput}
           placeholder="비밀번호 확인"
           $signIn={isInOpen}
-          value={confirmPw}
+          value={register.confirmPw}
+          name="confirmPw"
           type="password"
         />
         <SignButton

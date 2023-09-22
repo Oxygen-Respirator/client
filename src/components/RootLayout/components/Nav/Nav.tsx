@@ -15,9 +15,9 @@ const Nav = () => {
 
   useEffect(() => {
     if (token) {
-      setIsLogin(true);
+      setIsSignModal(prev => ({ ...prev, in: true }));
     } else {
-      setIsLogin(false);
+      setIsSignModal(prev => ({ ...prev, in: true }));
     }
   }, [token]);
 
