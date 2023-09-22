@@ -118,6 +118,9 @@ const ChatContainer = styled.div`
   justify-content: space-between;
   padding: 3rem;
   position: relative;
+  @media screen and (max-width: 768px) {
+    padding: 2rem;
+  }
 `;
 
 const MessageWrap = styled.div`
@@ -166,6 +169,10 @@ const MyMessageWrap = styled.div`
   background-color: #fefcf4;
   border-radius: 0.75rem 0.75rem 0 0.75rem;
   line-height: 180%;
+  margin-bottom: 1rem;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const AIMessageWrap = styled.div`
   width: 30%;
@@ -215,12 +222,22 @@ const ChatSendBtn = styled.button`
   justify-content: center;
   align-items: center;
   gap: 8px;
-  color: #474747;
   border: 1px solid #d7d7d7;
   border-radius: 8px;
   background-color: #fff;
   font-size: 0.9rem;
   font-weight: bold;
+`;
+
+const SubjectItemWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  margin-top: 1.5rem;
+  max-width: 800px;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const SubjectItem = styled.button<{ $selectdSbj: boolean }>`
@@ -233,12 +250,8 @@ const SubjectItem = styled.button<{ $selectdSbj: boolean }>`
   border-radius: 10px;
   font-weight: bold;
   width: 130px;
-`;
-
-const SubjectItemWrap = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
-  margin-top: 1.5rem;
-  width: 800px;
+  @media screen and (max-width: 768px) {
+    width: 100px;
+    padding: 0.5rem;
+  }
 `;

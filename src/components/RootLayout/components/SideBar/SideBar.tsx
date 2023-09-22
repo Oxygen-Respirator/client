@@ -39,6 +39,9 @@ const SideBarContainer = styled.div`
   background-color: ${({ theme: { color } }) => color.subColor};
   box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
   padding: 2rem;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Myinfo = styled.div`
