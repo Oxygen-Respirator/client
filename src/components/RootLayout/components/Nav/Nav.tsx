@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Sign from "./Sign";
 import { LogoIcon } from "@/components/Svg";
 
 const Nav = () => {
-  const params = useParams();
   const [isSignModal, setIsSignModal] = useState<IsSignModal>({
     in: false,
     up: false,
@@ -26,7 +25,7 @@ const Nav = () => {
 
   useEffect(() => {
     const isToken = localStorage.getItem("ptToken");
-    isToken && setIsSignModal(prev => ({ ...prev, in: true }));
+    !isToken && setIsSignModal(prev => ({ ...prev, in: true }));
   }, []);
 
   const onClickLoginOutBtn = () => {

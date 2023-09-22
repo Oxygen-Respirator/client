@@ -64,13 +64,15 @@ export default function Sign({
       await signInSubmit(
         { userId, userPw },
         {
-          onSuccess: data => {
-            if (data instanceof Axios) {
-            }
+          onSuccess: result => {
+            const { headers } = result;
+            localStorage.setItem("ptToken", headers.authorization);
+            setIsSignModal(prev => ({ ...prev, in: false }));
           },
           onError: error => {
             if (error instanceof AxiosError) {
-              alert(error.response?.data?.message);
+              const { response } = error;
+              alert(response?.data.message);
             }
           },
         },
