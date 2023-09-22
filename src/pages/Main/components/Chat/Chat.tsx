@@ -182,6 +182,10 @@ const AIMessageWrap = styled.div`
   border-radius: 0.75rem 0.75rem 0.75rem 0;
   line-height: 180%;
   margin-top: 1.5rem;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    min-width: 100%;
+  }
 `;
 
 const ChatWrap = styled.div`
@@ -198,6 +202,10 @@ const ChatWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    min-width: 100%;
+  }
 `;
 const CustomTextarea = styled.textarea`
   width: 100%;
