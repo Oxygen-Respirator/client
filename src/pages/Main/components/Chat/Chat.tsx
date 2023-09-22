@@ -20,6 +20,7 @@ const Chat = () => {
   return (
     <ChatContainer>
       <MessageWrap>
+        <DateText>오늘</DateText>
         <AIContainrer>
           <Row>
             <ProfileImgWrap>
@@ -128,6 +129,10 @@ const MessageWrap = styled.div`
   padding-bottom: 150px;
 `;
 
+const DateText = styled.p`
+  width: 100%;
+  text-align: center;
+`;
 const ProfileImgWrap = styled.div`
   display: flex;
   justify-content: center;
