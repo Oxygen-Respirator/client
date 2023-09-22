@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import Nav from "./components/Nav/Nav";
+import Nav from "./components/Nav";
 import SideBar from "./components/SideBar";
 import SignUpModal from "./components/Modal/SignUpModal";
 import { useRecoilValue } from "recoil";
