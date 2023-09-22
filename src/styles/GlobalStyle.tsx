@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
    @font-face {
@@ -218,11 +218,9 @@ body {
   padding: 0;
   font-size: 1rem;
   font-weight: 400;
-  color: #333;
+  color: #434343;
   text-decoration: none;
   line-height: 1.25;
-  color: inherit;
-
 }
 
 `;
