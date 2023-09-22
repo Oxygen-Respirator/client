@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { deleteCookie, getCookie } from "@/utils/cookie";
+import { LogoIcon } from "@/components/Svg";
 import Sign from "./Sign";
 
 const Nav = () => {
@@ -16,16 +17,30 @@ const Nav = () => {
   useEffect(() => {
     if (token) {
       setIsSignModal(prev => ({ ...prev, in: true }));
-      setIsLogin(true)
+      setIsLogin(true);
     } else {
-
       setIsSignModal(prev => ({ ...prev, in: true }));
     }
   }, [token]);
 
   return (
     <HeaderContainer>
-      <LogoText to="/">AI 면접 멘토</LogoText>
+      <LogoIconWrap to="/">
+        <LogoIcon />
+      </LogoIconWrap>
+      <div>
+        <ul>
+          <li>
+            <Link to="/">AI 모의면접</Link>
+          </li>
+          <li>
+            <Link to="/">랭킹</Link>
+          </li>
+          <li>
+            <Link to="/">학습 리포트</Link>
+          </li>
+        </ul>
+      </div>
       <div>
         {isLogin ? (
           <Row>
@@ -76,7 +91,7 @@ const HeaderContainer = styled.div`
   box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
 `;
 
-const LogoText = styled(Link)`
+const LogoIconWrap = styled(Link)`
   font-weight: bold;
   color: ${({ theme: { color } }) => color.mainColor};
   font-size: 18px;
