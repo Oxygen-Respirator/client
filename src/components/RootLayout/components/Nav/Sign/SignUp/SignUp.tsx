@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { styled } from "styled-components";
-import { Button, Input, SignWrap } from "../style";
+import { SignButton, SignForm, SignInput, SignWrap } from "../style";
 import { useSignUpMutation } from "../signHook/signMutationHook";
 import { useNavigate } from "react-router-dom";
 
@@ -40,7 +40,7 @@ export default function SignUp() {
 
   return (
     <SignWrap>
-      <Form onSubmit={onSubmit}>
+      <SignForm onSubmit={onSubmit}>
         <InputSignUp
           onChange={onChangeInput}
           placeholder="닉네임"
@@ -82,7 +82,7 @@ export default function SignUp() {
             취소
           </SignUpButton>
         </BtnWrap>
-      </Form>
+      </SignForm>
     </SignWrap>
   );
 }
@@ -93,18 +93,13 @@ const BtnWrap = styled.div`
   margin-top: 50px;
 `;
 
-const InputSignUp = styled(Input)`
+const InputSignUp = styled(SignInput)`
   padding: 20px 40px;
   margin-bottom: 10px;
   font-size: 22px;
 `;
 
-const Form = styled.form`
-  width: 100%;
-  max-width: 400px;
-`;
-
-const SignUpButton = styled(Button)`
+const SignUpButton = styled(SignButton)`
   border: 1px solid;
   padding: 20px 0;
   width: 100%;

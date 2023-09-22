@@ -25,6 +25,7 @@ export default RootLayout;
 const RootContainer = styled.div`
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 `;
 const Row = styled.div`
   width: 100%;

@@ -4,6 +4,8 @@ import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { signUpModalOpenAtom } from "@/atom/modal";
 import { deleteCookie, getCookie, setCookie } from "@/utils/cookie";
+import { SignIn, SignUp } from "./Sign";
+import { SignWrap } from "./Sign/style";
 
 const Nav = () => {
   const setSignUpModalOpen = useSetRecoilState(signUpModalOpenAtom);
@@ -61,6 +63,12 @@ const Nav = () => {
           </Row>
         )}
       </div>
+      {true && (
+        <SignWrap>
+          <SignIn />
+          <SignUp />
+        </SignWrap>
+      )}
     </HeaderContainer>
   );
 };

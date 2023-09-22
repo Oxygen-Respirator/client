@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { styled } from "styled-components";
-import { Button, Input, SignWrap } from "../style";
+import { SignButton, SignForm, SignInput, SignWrap } from "../style";
 import { useSignInMutation } from "../signHook/signMutationHook";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ export default function SignIn() {
 
   return (
     <SignWrap>
-      <Form onSubmit={onSubmit}>
+      <SignForm onSubmit={onSubmit}>
         <InputSignIn
           onChange={onChangeInput}
           placeholder="아이디"
@@ -63,23 +63,18 @@ export default function SignIn() {
         >
           회원가입
         </SignInButton>
-      </Form>
+      </SignForm>
     </SignWrap>
   );
 }
 
-const InputSignIn = styled(Input)`
+const InputSignIn = styled(SignInput)`
   padding: 20px 40px;
   margin-bottom: 10px;
   font-size: 22px;
 `;
 
-const Form = styled.form`
-  width: 100%;
-  max-width: 400px;
-`;
-
-const SignInButton = styled(Button)`
+const SignInButton = styled(SignButton)`
   margin: ${({ $reverse }) => ($reverse ? "50px 0 20px 0" : "0")};
   border: 1px solid;
   padding: 20px 0;

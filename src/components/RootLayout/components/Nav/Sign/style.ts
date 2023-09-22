@@ -1,18 +1,20 @@
 import { styled } from "styled-components";
 
-export const Input = styled.input`
+export const SignInput = styled.input`
   border: 1px solid ${({ theme: { color } }) => color.borderColor};
   border-radius: ${({ theme: { border } }) => border.defaultRadius};
   display: block;
   width: 100%;
 `;
 
-export const Form = styled.form`
+export const SignForm = styled.form`
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
+  background: white;
+  padding: 70px;
 `;
 
-export const Button = styled.button<{
+export const SignButton = styled.button<{
   $reverse?: boolean;
   $isDisable?: boolean;
 }>`
@@ -39,4 +41,6 @@ export const SignWrap = styled.div`
   left: 0;
   align-items: center;
   justify-content: center;
+  background: ${({ theme: { color } }) => color.opacityBg};
+  z-index: 9999;
 `;
