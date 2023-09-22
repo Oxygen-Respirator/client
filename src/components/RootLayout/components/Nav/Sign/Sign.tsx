@@ -30,23 +30,45 @@ export default function Sign({
     confirmPw: "",
   });
 
+  const [errorMsg,setErrorMsg] = useState("")
+
   const { mutateAsync: signUpSubmit } = useSignUpMutation();
   const { mutateAsync: signInSubmit } = useSignInMutation();
 
-  function onChangeInput({
-    target: { name, value },
+  const onChangeInput =( name: keyof Sign)=>({
+    target: { value },
   }: {
-    target: { name: string; value: string };
-  }) {
-    setRegister(prev => ({ ...prev, [name]: value }));
+    target: { value: string };
+  }) =>{
+    if(value===""){
+      setRegister(prev => ({ ...prev, [name]: value }));
+      return ;
+    }
+    if(name==='userNickname'&&register[name].length>7){
+      return;
+    }
+    if(register[name].length>11){
+      return;
+    }    
+    const regex = /^[a-zA-Z0-9]+$/;
+    const isValid = regex.test(value);
+
+    if(isValid){ 
+      setRegister(prev => ({ ...prev, [name]: value }));
+    }
   }
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { userId, userPw, confirmPw, userNickname } = register;
     if (isInOpen) {
-      const result = await signInSubmit({ userId, userPw });
-      console.log(result);
+      const response = await signInSubmit({ userId, userPw });
+      const {status} =response;
+      if(status===200){
+        const {headers} = response;
+        localStorage.setItem('ptToken',headers.authorization)
+        setIsSignModal(prev=>({...prev,in:false}))
+      }
     } else {
       const { userPw } = register;
       if (userPw !== confirmPw) {
@@ -54,18 +76,9 @@ export default function Sign({
         return;
       }
       const result = await signUpSubmit({ userId, userPw, userNickname });
-      console.log(result);
+
     }
   };
-
-  // const expirationTime = new Date();
-  // expirationTime.setHours(expirationTime.getHours() + 24);
-  // setCookie("token", "token", {
-  //   path: "/",
-  //   secure: true,
-  //   expires: expirationTime,
-  // });
-  // location.href = "/";
 
   const isUpDisable = Object.values(register).some(_obj => _obj === "");
 
@@ -100,33 +113,29 @@ export default function Sign({
           <SignP>회원이 되면 모든 서비스를 이용하실 수 있습니다.</SignP>
         </div>
         <SignInput
-          onChange={onChangeInput}
-          placeholder="닉네임"
+          onChange={onChangeInput('userNickname')}
+          placeholder="닉네임 (영문 + 숫자 10자리)"
           $signIn={isInOpen}
           value={register.userNickname}
-          name="userNickname"
           type="text"
         />
         <SignInput
-          onChange={onChangeInput}
-          placeholder="아이디"
+          onChange={onChangeInput('userId')}
+          placeholder="아이디 (영문 + 숫자 12자리)"
           value={register.userId}
-          name="userId"
           type="text"
         />
         <SignInput
-          onChange={onChangeInput}
-          placeholder="비밀번호"
+          onChange={onChangeInput('userPw')}
+          placeholder="비밀번호 (영문 + 숫자 12자리)"
           value={register.userPw}
-          name="userPw"
           type="password"
         />
         <SignInput
-          onChange={onChangeInput}
-          placeholder="비밀번호 확인"
+          onChange={onChangeInput('confirmPw')}
+          placeholder="비밀번호 확인 (영문 + 숫자 12자리)"
           $signIn={isInOpen}
           value={register.confirmPw}
-          name="confirmPw"
           type="password"
         />
         <SignButton

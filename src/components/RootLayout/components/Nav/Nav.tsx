@@ -12,16 +12,13 @@ const Nav = () => {
   });
 
   const [isLogin, setIsLogin] = useState(false);
-  const token = getCookie("token");
 
   useEffect(() => {
-    if (token) {
-      setIsSignModal(prev => ({ ...prev, in: true }));
+    const isToken = localStorage.getItem("ptToken");
+    if (isToken) {
       setIsLogin(true);
-    } else {
-      setIsSignModal(prev => ({ ...prev, in: true }));
     }
-  }, [token]);
+  }, [isSignModal]);
 
   return (
     <HeaderContainer>
