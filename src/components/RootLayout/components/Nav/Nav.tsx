@@ -16,21 +16,24 @@ const Nav = () => {
     { to: "/report", text: "학습 리포트" },
   ];
 
-  const [userInfo, setUserInfo] = useState();
+  const [userInfo, setUserInfo] = useState({ userId: "", userNickname: "" });
 
   const { mutateAsync: getUserInfo } = useGetUserInfoMutation();
 
   const [isLogin, setIsLogin] = useState(false);
 
   const onGetUserInfo = useCallback(async () => {
-    await getUserInfo();
+    const {
+      data: { data: _userInfo },
+    } = await getUserInfo();
+    setUserInfo(_userInfo);
+    setIsLogin(true);
   }, [getUserInfo]);
 
   useEffect(() => {
     const isToken = localStorage.getItem("ptToken");
     if (isToken) {
       onGetUserInfo();
-      setIsLogin(true);
     }
   }, [isSignModal, onGetUserInfo]);
 
@@ -61,7 +64,9 @@ const Nav = () => {
         <div>
           {isLogin ? (
             <Row>
-              <p>아리(Ari) 님 반가워요!</p>
+              <p>
+                {userInfo.userId}({userInfo.userId}) 님 반가워요!
+              </p>
               <Button type="button" onClick={onClickLoginOutBtn}>
                 로그아웃
               </Button>
