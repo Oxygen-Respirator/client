@@ -8,11 +8,11 @@ import {
   SignWrap,
 } from "./style";
 
+import { AxiosError } from "axios";
 import {
   useSignInMutation,
   useSignUpMutation,
-} from "./signHook/signMutationHook";
-import { Axios, AxiosError } from "axios";
+} from "../authHook/authMutationHook";
 
 export default function Sign({
   isSignModal,
