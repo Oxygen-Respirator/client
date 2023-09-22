@@ -31,8 +31,6 @@ export default function Sign({
     confirmPw: "",
   });
 
-  const [errorMsg, setErrorMsg] = useState("");
-
   const { mutateAsync: signUpSubmit } = useSignUpMutation();
   const { mutateAsync: signInSubmit } = useSignInMutation();
 
