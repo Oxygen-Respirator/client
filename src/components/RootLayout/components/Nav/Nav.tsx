@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { LogoIcon, MyProfile } from "@/components/Svg";
 import Sign from "./Sign";
+import { LogoIcon } from "@/components/Svg";
+import { useGetUserInfoMutation } from "./authHook/authMutationHook";
 
 const Nav = () => {
   const [isSignModal, setIsSignModal] = useState<IsSignModal>({
@@ -14,14 +16,24 @@ const Nav = () => {
     { to: "/rank", text: "랭킹" },
     { to: "/report", text: "학습 리포트" },
   ];
+
+  const [userInfo, setUserInfo] = useState();
+
+  const { mutateAsync: getUserInfo } = useGetUserInfoMutation();
+
   const [isLogin, setIsLogin] = useState(false);
+
+  const onGetUserInfo = useCallback(async () => {
+    await getUserInfo();
+  }, [getUserInfo]);
 
   useEffect(() => {
     const isToken = localStorage.getItem("ptToken");
     if (isToken) {
+      onGetUserInfo();
       setIsLogin(true);
     }
-  }, [isSignModal]);
+  }, [isSignModal, onGetUserInfo]);
 
   useEffect(() => {
     const isToken = localStorage.getItem("ptToken");
@@ -31,6 +43,7 @@ const Nav = () => {
   const onClickLoginOutBtn = () => {
     localStorage.removeItem("ptToken");
     setIsLogin(false);
+    setIsSignModal({ in: true, up: false });
   };
 
   return (
