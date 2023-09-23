@@ -72,6 +72,7 @@ const Nav = () => {
 
         <RowBetwwen>
           <LinkList>
+
             {links.map(link => (
               <LinkItem key={link.text} $location={!!(location === link.to)}>
                 <LinkBtn
@@ -350,23 +351,23 @@ const MoblieLinkList = styled.ul`
   margin: 2rem 0;
   padding: 0 2rem;
 `;
-const MoblieLinkItem = styled.li<{ location?: boolean }>`
+const MoblieLinkItem = styled.li<{ $location?: boolean }>`
   width: 100%;
-  font-weight: ${({ location }) => location && "bold"};
-  border-bottom: ${({ theme: { color }, location }) =>
-    location && `2px solid ${color.mainColor}`};
-  background-color: ${({ theme: { color }, location }) =>
-    location && color.subColor};
+  font-weight: ${({ $location }) => $location && "bold"};
+  border-bottom: ${({ theme: { color }, $location }) =>
+    $location && `2px solid ${color.mainColor}`};
+  background-color: ${({ theme: { color }, $location }) =>
+    $location && color.subColor};
   padding: 2px;
   width: 100%;
   border: none;
 `;
 
-const MoblieLinkBtn = styled.button<{ location: boolean }>`
+const MoblieLinkBtn = styled.button<{ $location: boolean }>`
   width: 100%;
   height: 100%;
   padding: 1rem;
-  font-weight: ${({ location }) => location && "bold"};
+  font-weight: ${({ $location }) => $location && "bold"};
   text-align: left;
 `;
 const MoblieRowBetwwen = styled.div`
