@@ -28,6 +28,14 @@ jobs:
             ${{ runner.OS }}-
           cache: "yarn"
 
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "VITE_BASE_URL=$VITE_BASE_URL" >> .env
+          cat .env
+
+        env:
+          VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
+
       - name: Install Dependencies
         run: yarn install
 
