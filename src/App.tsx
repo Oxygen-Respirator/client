@@ -17,9 +17,14 @@ interface Theme {
   };
 }
 
-
 function App() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 1,
+      },
+    },
+  });
 
   const theme: Theme = {
     color: {
