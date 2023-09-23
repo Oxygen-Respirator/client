@@ -12,7 +12,7 @@ import { AxiosError } from "axios";
 import {
   useSignInMutation,
   useSignUpMutation,
-} from "../authHook/authMutationHook";
+} from "../authHook/userAuthMutation";
 
 export default function Sign({
   isSignModal,

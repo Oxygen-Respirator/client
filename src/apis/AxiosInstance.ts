@@ -1,4 +1,4 @@
-import { deleteCookie, getCookie } from "@/utils/cookie";
+import { deleteCookie } from "@/utils/cookie";
 import axios, { AxiosInstance } from "axios";
 
 interface Headers {
@@ -17,9 +17,9 @@ const createAxiosInstance = (headers: Headers): AxiosInstance => {
 
   instance.interceptors.request.use(
     config => {
-      const token = getCookie("token");
+      const token = localStorage.getItem("ptToken");
       if (token) {
-        config.headers.authorization = token;
+        config.headers.authorization = `Bearer ${token}`;
       }
       return config;
     },
