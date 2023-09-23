@@ -47,6 +47,10 @@ interface TableDataProps {
   key: StringNumber;
 }
 
+interface Checkbox {
+  isCheck: boolean;
+}
+
 // pagination?: boolean;
 //   curPage?: number;
 //   pageItemCount?: number;
