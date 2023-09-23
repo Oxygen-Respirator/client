@@ -1,27 +1,55 @@
 import styled from "styled-components";
 import Logo from "../../../../../public/logo.svg";
+import chatApis from "@/apis/chatApis";
+import { useQuery } from "@tanstack/react-query";
+import { useSetRecoilState } from "recoil";
+import { groupIdState } from "@/atom/chat";
+
 const SideBar = () => {
+  const setGroupId = useSetRecoilState(groupIdState);
+  const { data: chatListData, isSuccess: isChatListData } = useQuery<
+    ChatData[]
+  >(["chatList"], () => chatApis.get());
+
   const SUBJECT_LIST = [
-    "Java",
-    "JavaScript",
-    "Kotlin",
-    "React",
-    "Next.js",
-    "Node.js",
-    "Nest.js",
-    "Spring",
-    "CS",
+    { title: "Java", id: 1 },
+    { title: "JavaScript", id: 2 },
+    { title: "Kotlin", id: 3 },
+    { title: "React", id: 4 },
+    { title: "Next.js", id: 5 },
+    { title: "Node.js", id: 6 },
+    { title: "Nest.js", id: 7 },
+    { title: "Spring", id: 8 },
+    { title: "CS", id: 9 },
   ];
+
+  function getIdByTitle(title: string) {
+    const subject = SUBJECT_LIST.find(item => item.title === title);
+    return subject ? subject.id : null;
+  }
   return (
     <SideBarContainer>
       <div>
         <TitleText>히스토리</TitleText>
-        {SUBJECT_LIST.map(sbj => (
-          <Myinfo key={sbj}>
-            <img src={Logo} />
-            {sbj} 모의면접
-          </Myinfo>
-        ))}
+        {isChatListData &&
+          chatListData.map(({ langGroupName }) => (
+            <Myinfo
+              key={langGroupName}
+              type="button"
+              onClick={() => {
+                if (langGroupName) {
+                  const gruopId = getIdByTitle(langGroupName);
+                  if (gruopId) {
+                    setGroupId(gruopId);
+                  }
+                }
+              }}
+            >
+              <img src={Logo} />
+              {langGroupName} 모의면접
+            </Myinfo>
+          ))}
+        {chatListData?.length === 0 && <p>대화기록이 없습니다.</p>}
       </div>
     </SideBarContainer>
   );
@@ -46,7 +74,7 @@ const SideBarContainer = styled.div`
   }
 `;
 
-const Myinfo = styled.div`
+const Myinfo = styled.button`
   width: 100%;
   margin-top: 1rem;
   padding: 1rem;
@@ -54,5 +82,4 @@ const Myinfo = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  cursor: pointer;
 `;

@@ -4,12 +4,13 @@ import { AiProfile } from "@/components/Svg";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import chatApis from "@/apis/chatApis";
 import { userInfoAtom } from "@/atom/userInfo";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { groupIdState } from "@/atom/chat";
 
 const Chat = () => {
   const { remainAnswerCount, maxAnswerCount } = useRecoilValue(userInfoAtom);
   const messageEndRef = useRef<HTMLDivElement | null>(null);
-  const [groupId, setGroupId] = useState<number>(1);
+  const [groupId, setGroupId] = useRecoilState(groupIdState);
   const [message, setMessage] = useState<string | null>(null);
 
   const queryClient = useQueryClient();
