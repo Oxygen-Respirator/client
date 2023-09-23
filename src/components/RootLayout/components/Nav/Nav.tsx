@@ -3,9 +3,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { LogoIcon, MyProfile, Close } from "@/components/Svg";
 import Sign from "./Sign";
-import { useGetUserInfoMutation } from "./authHook/authMutationHook";
+import { useGetUserInfoMutation } from "./authHook/userAuthMutation";
 import { useRecoilState } from "recoil";
 import { userInfoAtom } from "@/atom/userInfo";
+import { useGetLangListMutation } from "@/queryHook/useLangMutation";
+import { useSetRecoilState } from "recoil";
+import { langListAtom } from "@/atom/langList";
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -22,8 +25,10 @@ const Nav = () => {
   ];
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  const setLangAry = useSetRecoilState(langListAtom);
 
   const { mutateAsync: getUserInfo } = useGetUserInfoMutation();
+  const { mutateAsync: getLangList } = useGetLangListMutation();
 
   const [isLogin, setIsLogin] = useState(false);
 
@@ -31,9 +36,12 @@ const Nav = () => {
     const {
       data: { data: _userInfo },
     } = await getUserInfo();
+
+    const { data: _langList } = await getLangList();
+    setLangAry(_langList.data);
     setUserInfo(_userInfo);
     setIsLogin(true);
-  }, [getUserInfo, setUserInfo]);
+  }, [getLangList, getUserInfo, setLangAry, setUserInfo]);
 
   useEffect(() => {
     const isToken = localStorage.getItem("ptToken");

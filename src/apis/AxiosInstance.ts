@@ -1,4 +1,4 @@
-import { deleteCookie, getCookie } from "@/utils/cookie";
+import { deleteCookie } from "@/utils/cookie";
 import axios, { AxiosInstance } from "axios";
 
 interface Headers {
