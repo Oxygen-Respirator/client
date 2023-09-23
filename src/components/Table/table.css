@@ -1,0 +1,126 @@
+/* 기본 적용 구간 */
+.ty-table {
+  width: 100%;
+}
+
+.ty-table tr td {
+  text-align: center;
+}
+
+.ty-table tr {
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.ty-table tr td {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ty-tbody tr {
+  background: white;
+}
+
+/* disabled */
+
+.ty-table .ty-tbody .ty-disable {
+  pointer-events: none;
+}
+
+.ty-table .ty-tbody .ty-disable .ty-checkbox {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.ty-table .ty-tbody .ty-disable td {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+/* 커스텀 구간 */
+
+.ty-table tr {
+  border: none;
+}
+
+.ty-table thead tr {
+  background: none;
+}
+
+.ty-table {
+  border-collapse: separate;
+}
+
+.ty-table tbody tr {
+  overflow: hidden;
+}
+
+.ty-table thead tr td {
+  font-weight: bold;
+  padding: 20px 0;
+}
+
+.ty-table tbody tr td {
+  padding: 20px 0;
+}
+
+.ty-table tbody tr:nth-child(odd) td {
+  background: var(--subColor);
+}
+
+.ty-pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.ty-pagination ul {
+  display: flex;
+  column-gap: 30px;
+}
+
+.ty-table .ty-checkbox {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  margin: 0 auto;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.ty-table .ty-checkbox-checked {
+  background: rgba(51, 128, 255, 0.8);
+  border-color: rgba(51, 128, 255, 0.8);
+}
+
+.ty-table .ty-checkbox .ty-line {
+  width: 18px;
+  display: block;
+  height: 3px;
+  position: absolute;
+  bottom: 12px;
+}
+
+.ty-table .ty-checkbox .ty-left-line {
+  transform: rotate(55deg);
+  -webkit-transform: rotate(55deg);
+  -moz-transform: rotate(55deg);
+  -ms-transform: rotate(55deg);
+  -o-transform: rotate(55deg);
+  width: 10px;
+  left: 3px;
+  bottom: 8px;
+}
+
+.ty-table .ty-checkbox .ty-right-line {
+  right: 2px;
+  transform: rotate(-55deg);
+  -webkit-transform: rotate(-55deg);
+  -moz-transform: rotate(-55deg);
+  -ms-transform: rotate(-55deg);
+  -o-transform: rotate(-55deg);
+}
+
+.ty-table .ty-checkbox-checked .ty-line {
+  background: white;
+}
