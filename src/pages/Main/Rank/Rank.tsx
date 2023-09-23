@@ -32,7 +32,6 @@ export default function Rank() {
     setCurLang(Number(value));
   };
 
-  console.log(curLang);
   return (
     <>
       <LangBox>
