@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import Logo from "../../../../../public/logo.svg";
 const SideBar = () => {
   const SUBJECT_LIST = [
     "Java",
@@ -17,7 +17,10 @@ const SideBar = () => {
       <div>
         <TitleText>히스토리</TitleText>
         {SUBJECT_LIST.map(sbj => (
-          <Myinfo key={sbj}>{sbj} 모의면접</Myinfo>
+          <Myinfo key={sbj}>
+            <img src={Logo} />
+            {sbj} 모의면접
+          </Myinfo>
         ))}
       </div>
     </SideBarContainer>
@@ -47,7 +50,8 @@ const Myinfo = styled.div`
   width: 100%;
   margin-top: 1rem;
   padding: 1rem;
-  background-color: #fff;
-  border-radius: 10px;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `;
