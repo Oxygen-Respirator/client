@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { LogoIcon, MyProfile } from "@/components/Svg";
 import Sign from "./Sign";
 import { useGetUserInfoMutation } from "./authHook/authMutationHook";
+import { useRecoilState } from "recoil";
+import { userInfoAtom } from "@/atom/userInfo";
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ const Nav = () => {
     { to: "/report", text: "학습 리포트" },
   ];
 
-  const [userInfo, setUserInfo] = useState({ userId: "", userNickname: "" });
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
 
   const { mutateAsync: getUserInfo } = useGetUserInfoMutation();
 
@@ -31,7 +33,7 @@ const Nav = () => {
     } = await getUserInfo();
     setUserInfo(_userInfo);
     setIsLogin(true);
-  }, [getUserInfo]);
+  }, [getUserInfo, setUserInfo]);
 
   useEffect(() => {
     const isToken = localStorage.getItem("ptToken");

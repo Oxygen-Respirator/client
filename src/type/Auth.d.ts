@@ -1,12 +1,12 @@
-interface Sign extends SignUp{
+interface Sign extends SignUp {
   confirmPw: string;
 }
 
-interface SignUp extends SignIn{
+interface SignUp extends SignIn {
   userNickname: string;
 }
 
-interface SignIn{
+interface SignIn {
   userId: string;
   userPw: string;
 }
