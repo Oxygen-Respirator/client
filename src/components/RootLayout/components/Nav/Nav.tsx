@@ -72,7 +72,6 @@ const Nav = () => {
 
         <RowBetwwen>
           <LinkList>
-
             {links.map(link => (
               <LinkItem key={link.text} $location={!!(location === link.to)}>
                 <LinkBtn
@@ -160,10 +159,10 @@ const Nav = () => {
               {links.map(link => (
                 <MoblieLinkItem
                   key={link.text}
-                  location={!!(location === link.to)}
+                  $location={!!(location === link.to)}
                 >
                   <MoblieLinkBtn
-                    location={!!(location === link.to)}
+                    $location={!!(location === link.to)}
                     onClick={() => {
                       navigate(`${link.to}`);
                       setIsMobileMenuOpen(false);
