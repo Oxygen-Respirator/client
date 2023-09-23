@@ -59,9 +59,9 @@ const LangSelect = styled.select``;
 
 const LangOption = styled.option``;
 
-const RankP = styled.p`
-  text-align: right;
-`;
+// const RankP = styled.p`
+//   text-align: right;
+// `;
 
 interface RankData {
   rank: number;
@@ -97,35 +97,35 @@ const columns: TableColumns<RankData> = [
   },
 ];
 
-const data: RankData[] = [
-  {
-    rank: 1,
-    nickname: "아리",
-    resolveCount: 1280,
-    totalScore: 48230,
-  },
-  {
-    rank: 2,
-    nickname: "재키",
-    resolveCount: 1250,
-    totalScore: 48000,
-  },
-  {
-    rank: 3,
-    nickname: "애나",
-    resolveCount: 1220,
-    totalScore: 47800,
-  },
-  {
-    rank: 4,
-    nickname: "레오",
-    resolveCount: 1200,
-    totalScore: 46523,
-  },
-  {
-    rank: 5,
-    nickname: "테리",
-    resolveCount: 1180,
-    totalScore: 46000,
-  },
-];
+// const data: RankData[] = [
+//   {
+//     rank: 1,
+//     nickname: "아리",
+//     resolveCount: 1280,
+//     totalScore: 48230,
+//   },
+//   {
+//     rank: 2,
+//     nickname: "재키",
+//     resolveCount: 1250,
+//     totalScore: 48000,
+//   },
+//   {
+//     rank: 3,
+//     nickname: "애나",
+//     resolveCount: 1220,
+//     totalScore: 47800,
+//   },
+//   {
+//     rank: 4,
+//     nickname: "레오",
+//     resolveCount: 1200,
+//     totalScore: 46523,
+//   },
+//   {
+//     rank: 5,
+//     nickname: "테리",
+//     resolveCount: 1180,
+//     totalScore: 46000,
+//   },
+// ];

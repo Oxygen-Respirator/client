@@ -54,4 +54,5 @@ const Myinfo = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
 `;
