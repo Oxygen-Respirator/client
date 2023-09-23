@@ -35,7 +35,6 @@ const SideBarContainer = styled.div`
   width: 15%;
   min-width: 220px;
   height: 100%;
-  border-radius: 0.75rem;
   background-color: ${({ theme: { color } }) => color.subColor};
   box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
   padding: 2rem;
