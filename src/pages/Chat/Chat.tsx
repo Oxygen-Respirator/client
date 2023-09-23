@@ -85,30 +85,46 @@ const Chat = () => {
           </SubjectItemWrap>
         </AIContainrer>
         {isSuccess &&
-          chatListData.map(({ id, createdAt, role, message }, index) => {
-            return (
-              <Fragment key={id}>
-                {index === 0 && <DateText>{createdAt}</DateText>}
-                {role === "assistant" && (
-                  <AIContainrer>
-                    <Row>
-                      <ProfileImgWrap>
-                        <AiProfile />
-                      </ProfileImgWrap>
-                      <p>AI 면접 멘토</p>
-                    </Row>
+          chatListData.map(
+            ({ id, userMessage, answer, tailQuestion, createdAt }, index) => {
+              return (
+                <Fragment key={id}>
+                  {index === 0 && <DateText>{createdAt}</DateText>}
 
-                    <AIMessageWrap>{message}</AIMessageWrap>
-                  </AIContainrer>
-                )}
-                {role === "user" && (
-                  <RowEnd>
-                    <MyMessageWrap>{message}</MyMessageWrap>
-                  </RowEnd>
-                )}
-              </Fragment>
-            );
-          })}
+                  {answer && (
+                    <AIContainrer>
+                      <Row>
+                        <ProfileImgWrap>
+                          <AiProfile />
+                        </ProfileImgWrap>
+                        <p>AI 면접 멘토</p>
+                      </Row>
+
+                      <AIMessageWrap>{answer}</AIMessageWrap>
+                    </AIContainrer>
+                  )}
+
+                  {userMessage && (
+                    <RowEnd>
+                      <MyMessageWrap>{userMessage}</MyMessageWrap>
+                    </RowEnd>
+                  )}
+                  {tailQuestion && (
+                    <AIContainrer>
+                      <Row>
+                        <ProfileImgWrap>
+                          <AiProfile />
+                        </ProfileImgWrap>
+                        <p>AI 면접 멘토</p>
+                      </Row>
+
+                      <AIMessageWrap>{tailQuestion}</AIMessageWrap>
+                    </AIContainrer>
+                  )}
+                </Fragment>
+              );
+            },
+          )}
         <div ref={messageEndRef}></div>
       </MessageWrap>
       <ChatWrap>

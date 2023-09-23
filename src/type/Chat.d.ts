@@ -1,9 +1,11 @@
 interface ChatData {
-  createdAt: string;
   id: number;
+  score: number;
   isResolve: boolean;
   langGroupName: string;
-  message: string;
-  role: string;
-  score: number;
+  userMessage: string;
+  answer: string;
+  keyword: string;
+  tailQuestion: string;
+  createdAt: string;
 }
