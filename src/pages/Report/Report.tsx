@@ -1,40 +1,62 @@
+import chatApis from "@/apis/chatApis";
+import reportApis from "@/apis/reportApis";
 import Table from "@/components/Table";
 import { comma } from "@/utils";
+import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 
 export default function Report() {
+  const { data: historyData, isSuccess } = useQuery<{
+    solvedCount: number;
+    triedCount: number;
+    rank: number;
+    totalScore: string;
+  }>(["getHistory"], () => reportApis.getHistory());
+
+  const { data: chatListData, isSuccess: isChatListData } = useQuery<
+    ChatData[]
+  >(["chatList"], () => chatApis.get());
+
   return (
     <>
-      <ReportWrap>
-        <ReportItem>
-          <ReportTitle>해결한 문제</ReportTitle>
-          <ReportDesc>
-            <BoldText>{reaportData.sovled}</BoldText> 개
-          </ReportDesc>
-        </ReportItem>
-        <ReportItem>
-          <ReportTitle>시도한 문제</ReportTitle>
-          <ReportDesc>
-            <BoldText>{reaportData.try}</BoldText> 개
-          </ReportDesc>
-        </ReportItem>
-        <ReportItem>
-          <ReportTitle>순위</ReportTitle>
-          <ReportDesc>
-            <BoldText>{reaportData.rank}</BoldText> 등
-          </ReportDesc>
-        </ReportItem>
-        <ReportItem>
-          <ReportTitle>점수</ReportTitle>
-          <ReportDesc>
-            <BoldText>{comma(reaportData.score)}</BoldText> 점
-          </ReportDesc>
-        </ReportItem>
-      </ReportWrap>
-      <ReportStudyLogWrap>
-        <ReportStudyLogTitle>학습 로그</ReportStudyLogTitle>
-        <Table pagination={false} tableData={data} columns={columns} />
-      </ReportStudyLogWrap>
+      {isSuccess && (
+        <ReportWrap>
+          <ReportItem>
+            <ReportTitle>해결한 문제</ReportTitle>
+            <ReportDesc>
+              <BoldText>{historyData.solvedCount}</BoldText> 개
+            </ReportDesc>
+          </ReportItem>
+          <ReportItem>
+            <ReportTitle>시도한 문제</ReportTitle>
+            <ReportDesc>
+              <BoldText>{historyData.triedCount}</BoldText> 개
+            </ReportDesc>
+          </ReportItem>
+          <ReportItem>
+            <ReportTitle>순위</ReportTitle>
+            <ReportDesc>
+              <BoldText>{historyData.rank}</BoldText> 등
+            </ReportDesc>
+          </ReportItem>
+          <ReportItem>
+            <ReportTitle>점수</ReportTitle>
+            <ReportDesc>
+              <BoldText>{comma(Number(historyData.totalScore))}</BoldText> 점
+            </ReportDesc>
+          </ReportItem>
+        </ReportWrap>
+      )}
+      {isChatListData && (
+        <ReportStudyLogWrap>
+          <ReportStudyLogTitle>학습 로그</ReportStudyLogTitle>
+          <Table
+            pagination={false}
+            tableData={chatListData}
+            columns={columns}
+          />
+        </ReportStudyLogWrap>
+      )}
     </>
   );
 }
@@ -79,20 +101,6 @@ const ReportStudyLogWrap = styled.div`
   margin-top: 5rem;
 `;
 
-const reaportData: Rport = {
-  sovled: 30,
-  try: 50,
-  rank: 20,
-  score: 1392,
-};
-
-interface Rport {
-  sovled: number;
-  try: number;
-  rank: number;
-  score: number;
-}
-
 interface ReportStudy {
   lang: string;
   keyword: string;
@@ -118,26 +126,5 @@ const columns: TableColumns<ReportStudy> = [
   {
     dataIndex: "date",
     title: "학습 일자",
-  },
-];
-
-const data: ReportStudy[] = [
-  {
-    lang: "React",
-    keyword: "state",
-    scroe: 70,
-    date: "2023.9.21",
-  },
-  {
-    lang: "Node.js",
-    keyword: "route",
-    scroe: 85,
-    date: "2023.9.22",
-  },
-  {
-    lang: "Node.js",
-    keyword: "ssr",
-    scroe: 90,
-    date: "2023.9.23",
   },
 ];

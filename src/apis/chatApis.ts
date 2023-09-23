@@ -1,8 +1,10 @@
 import { axiosInstance } from "./AxiosInstance";
 
 const chatApis = {
-  get: async (groupId: number) => {
-    const result = await axiosInstance.get(`message/${groupId}`);
+  get: async (groupId?: number) => {
+    const result = await axiosInstance.get(`message`, {
+      params: { "group-id": groupId },
+    });
     return result.data.data;
   },
   post: async (groupId: number, data: { message: string }) => {

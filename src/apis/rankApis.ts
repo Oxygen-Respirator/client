@@ -1,8 +1,10 @@
 import { axiosInstance } from "./AxiosInstance";
 
 const rankApis = {
-  get: async (_rangId: number) => {
-    const result = await axiosInstance.get(`rank/${_rangId}`);
+  get: async (groupId: number) => {
+    const result = await axiosInstance.get("rank", {
+      params: { "group-id": groupId },
+    });
     return result;
   },
 };
