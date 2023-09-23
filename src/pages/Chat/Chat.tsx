@@ -3,8 +3,11 @@ import styled from "styled-components";
 import { AiProfile } from "@/components/Svg";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import chatApis from "@/apis/chatApis";
+import { userInfoAtom } from "@/atom/userInfo";
+import { useRecoilValue } from "recoil";
 
 const Chat = () => {
+  const { remainAnswerCount, maxAnswerCount } = useRecoilValue(userInfoAtom);
   const messageEndRef = useRef<HTMLDivElement | null>(null);
   const [groupId, setGroupId] = useState<number>(1);
   const [message, setMessage] = useState<string | null>(null);
@@ -26,6 +29,9 @@ const Chat = () => {
   const { data: chatListData, isSuccess } = useQuery<ChatData[]>(
     ["chatList", groupId],
     () => chatApis.get(groupId),
+    {
+      enabled: !!groupId,
+    },
   );
 
   const postMessageMutation = useMutation(
@@ -45,11 +51,13 @@ const Chat = () => {
       setMessage(null);
     }
   };
+
   useEffect(() => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [chatListData]);
+
   return (
     <ChatContainer>
       <MessageWrap>
@@ -104,11 +112,19 @@ const Chat = () => {
       </MessageWrap>
       <ChatWrap>
         <CustomTextarea
+          disabled={!!(remainAnswerCount === 0)}
           value={message || ""}
           onChange={e => setMessage(e.target.value)}
+          placeholder={
+            remainAnswerCount === 0
+              ? "남은 답변 횟수가 없습니다."
+              : "텍스트를 입력해주세요"
+          }
         />
         <ChatSendBtnWrap>
-          <p>남은 답변 횟수 7/10</p>
+          <p>
+            남은 답변 횟수 {remainAnswerCount}/{maxAnswerCount}
+          </p>
           <ChatSendBtn onClick={handleSendMessage}>전송</ChatSendBtn>
         </ChatSendBtnWrap>
       </ChatWrap>
