@@ -57,6 +57,9 @@ export const SignWrap = styled.div`
   justify-content: center;
   background: ${({ theme: { color } }) => color.opacityBg};
   z-index: 9999;
+  @media screen and (max-width: 768px) {
+    background: white;
+  }
 `;
 
 export const SignH2 = styled.h2`

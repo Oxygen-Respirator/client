@@ -1,4 +1,3 @@
-import { deleteCookie } from "@/utils/cookie";
 import axios, { AxiosInstance } from "axios";
 
 interface Headers {
@@ -24,7 +23,6 @@ const createAxiosInstance = (headers: Headers): AxiosInstance => {
       return config;
     },
     error => {
-      console.log(error);
       return Promise.reject(error);
     },
   );
@@ -36,8 +34,8 @@ const createAxiosInstance = (headers: Headers): AxiosInstance => {
         error.response &&
         (error.response.status === 401 || error.response.status === 403)
       ) {
-        deleteCookie("token");
-        console.log("다시 로그인해주세요");
+        localStorage.remove("ptToken");
+        alert("다시 로그인해주세요");
 
         window.location.href = "/";
       } else {

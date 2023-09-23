@@ -1,5 +1,5 @@
 import Table from "@/components/Table";
-import { comma } from "@/util";
+import { comma } from "@/utils";
 import styled from "styled-components";
 
 export default function Report() {
@@ -41,8 +41,9 @@ export default function Report() {
 
 const ReportWrap = styled.ul`
   display: flex;
-  row-gap: 5px;
+  row-gap: 1rem;
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
 
 const ReportItem = styled.li`
@@ -50,6 +51,12 @@ const ReportItem = styled.li`
   width: 23%;
   border-radius: 1rem;
   padding: 1.5rem;
+  @media screen and (max-width: 768px) {
+    width: 47%;
+  }
+  @media screen and (max-width: 400px) {
+    padding: 1rem;
+  }
 `;
 
 const ReportTitle = styled.h3`
