@@ -1,10 +1,11 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { AiProfile } from "@/components/Svg";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import chatApis from "@/apis/chatApis";
 
 const Chat = () => {
+  const messageEndRef = useRef<HTMLDivElement | null>(null);
   const [groupId, setGroupId] = useState<number>(1);
   const [message, setMessage] = useState<string | null>(null);
 
@@ -44,7 +45,11 @@ const Chat = () => {
       setMessage(null);
     }
   };
-
+  useEffect(() => {
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chatListData]);
   return (
     <ChatContainer>
       <MessageWrap>
@@ -95,6 +100,7 @@ const Chat = () => {
               </Fragment>
             );
           })}
+        <div ref={messageEndRef}></div>
       </MessageWrap>
       <ChatWrap>
         <CustomTextarea
@@ -135,6 +141,9 @@ const MessageWrap = styled.div`
   }
   padding: 1rem;
   padding-bottom: 150px;
+  scroll-behavior: smooth;
+  height: 100%;
+  scroll-margin-bottom: 9999px;
 `;
 
 const DateText = styled.p`
