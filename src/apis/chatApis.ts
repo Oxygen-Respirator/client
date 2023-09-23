@@ -1,11 +1,10 @@
-import instance from "./instance"
+import { axiosInstance } from "./AxiosInstance";
 
 const chatApis = {
-    send:async(massge:string)=>{
-        const result = instance.post('chat',{massge})
-        return result
-    }
-}
+  send: async (massge: string) => {
+    const result = axiosInstance.post("chat", { massge });
+    return result;
+  },
+};
 
-
-export default chatApis
+export default chatApis;
