@@ -35,14 +35,16 @@ export default function PageLayout() {
     );
   };
   return (
-    <PageWrap>
+    <PageLayoutWrap>
       {PrintPageText()}
-      <Outlet />
-    </PageWrap>
+      <PageWrap>
+        <Outlet />
+      </PageWrap>
+    </PageLayoutWrap>
   );
 }
 
-const PageWrap = styled.main`
+const PageLayoutWrap = styled.main`
   width: 100%;
   height: 100%;
   padding: 3rem;
@@ -65,4 +67,8 @@ const PageH2 = styled.h2`
 
 const PageP = styled.p`
   line-height: 1.5;
+`;
+
+const PageWrap = styled.section`
+  margin-top: 100px;
 `;

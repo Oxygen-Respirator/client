@@ -209,6 +209,10 @@ input {
     --danger: #dc3545;
     --light: #f8f9fa;
     --dark: #343a40;
+    --mainColor: #18CD8C;
+    --subColor: #F4FEF6;
+    --borderColor: #C1C1C1;
+    --opacityBg: rgba(0,0,0,0.2);
 }
 *,
 body {
