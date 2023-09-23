@@ -72,8 +72,9 @@ const Nav = () => {
 
         <RowBetwwen>
           <LinkList>
-            {links.map((link, index) => (
-              <LinkItem key={index} $location={!!(location === link.to)}>
+
+            {links.map(link => (
+              <LinkItem key={link.text} $location={!!(location === link.to)}>
                 <LinkBtn
                   $location={!!(location === link.to)}
                   onClick={() => {
@@ -156,8 +157,11 @@ const Nav = () => {
               )}
             </MoblieRow>
             <MoblieLinkList>
-              {links.map((link, index) => (
-                <MoblieLinkItem key={index} location={!!(location === link.to)}>
+              {links.map(link => (
+                <MoblieLinkItem
+                  key={link.text}
+                  location={!!(location === link.to)}
+                >
                   <MoblieLinkBtn
                     location={!!(location === link.to)}
                     onClick={() => {
