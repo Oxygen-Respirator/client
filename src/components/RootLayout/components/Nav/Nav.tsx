@@ -64,10 +64,10 @@ const Nav = () => {
 
         <RowBetwwen>
           <LinkList>
-            {links.map((link, index) => (
-              <LinkItem key={index} location={!!(location === link.to)}>
+            {links.map(link => (
+              <LinkItem key={link.text} $location={!!(location === link.to)}>
                 <LinkBtn
-                  location={!!(location === link.to)}
+                  $location={!!(location === link.to)}
                   onClick={() => {
                     navigate(`${link.to}`);
                     setIsMobileMenuOpen(false);
@@ -102,7 +102,7 @@ const Nav = () => {
         </RowBetwwen>
         {<Sign isSignModal={isSignModal} setIsSignModal={setIsSignModal} />}
       </HeaderContainer>
-      <MoblieHeaderContainer isMobileMenuOpen={isMobileMenuOpen}>
+      <MoblieHeaderContainer $isMobileMenuOpen={isMobileMenuOpen}>
         <MoblieLogoIconContainer>
           <MoblieLogoIconWrap to="/">
             <LogoIcon />
@@ -148,8 +148,11 @@ const Nav = () => {
               )}
             </MoblieRow>
             <MoblieLinkList>
-              {links.map((link, index) => (
-                <MoblieLinkItem key={index} location={!!(location === link.to)}>
+              {links.map(link => (
+                <MoblieLinkItem
+                  key={link.text}
+                  location={!!(location === link.to)}
+                >
                   <MoblieLinkBtn
                     location={!!(location === link.to)}
                     onClick={() => {
@@ -248,22 +251,22 @@ const LinkList = styled.ul`
   align-items: center;
   gap: 1rem;
 `;
-const LinkItem = styled.li<{ location: boolean }>`
+const LinkItem = styled.li<{ $location: boolean }>`
   display: block;
   width: 130px;
   text-align: center;
-  font-weight: ${({ location }) => location && "bold"};
-  border-bottom: ${({ theme: { color }, location }) =>
-    location && `2px solid ${color.mainColor}`};
+  font-weight: ${({ $location }) => $location && "bold"};
+  border-bottom: ${({ theme: { color }, $location }) =>
+    $location && `2px solid ${color.mainColor}`};
   padding: 2px;
 `;
 
-const LinkBtn = styled.button<{ location: boolean }>`
+const LinkBtn = styled.button<{ $location: boolean }>`
   width: 100%;
   height: 100%;
   display: block;
   padding: 1rem;
-  font-weight: ${({ location }) => location && "bold"};
+  font-weight: ${({ $location }) => $location && "bold"};
 `;
 const RowBetwwen = styled.div`
   width: 100%;
@@ -273,13 +276,13 @@ const RowBetwwen = styled.div`
   padding-right: 2rem;
 `;
 
-const MoblieHeaderContainer = styled.div<{ isMobileMenuOpen: boolean }>`
+const MoblieHeaderContainer = styled.div<{ $isMobileMenuOpen: boolean }>`
   display: none;
   width: 100%;
   @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    height: ${({ isMobileMenuOpen }) => isMobileMenuOpen && "100%"};
+    height: ${({ $isMobileMenuOpen }) => $isMobileMenuOpen && "100%"};
   }
 `;
 const MoblieLogoIconContainer = styled.div`
