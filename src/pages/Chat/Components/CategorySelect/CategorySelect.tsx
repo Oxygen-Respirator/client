@@ -11,14 +11,14 @@ const CategorySelect = () => {
   return (
     <S.SubjectItemWrap>
       {langList.map(({ id, name }) => {
-        const coinCideId = !!(groupId === id);
+        const selectedId = !!(groupId === id);
         return (
           <S.SubjectItem
             key={id}
             onClick={() => {
               setGroupId(id);
             }}
-            $groupId={coinCideId}
+            $groupId={selectedId}
           >
             {name}
           </S.SubjectItem>
