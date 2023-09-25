@@ -1,27 +1,23 @@
-# React + TypeScript + Vite
+# 🤖 채찍-PT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+나만의 AI 멘토를 통해 면접 대비 및 생산성 증대
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✋ 채찍-PT가 제공하는 서비스
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 1.  도와줘 AI멘토!
 
-- Configure the top-level `parserOptions` property like this:
+- AI 멘토 통해 학습, 질문, 문제 해결 등 다양한 주제에 대한 답변과 도움을 받을 수 있습니다.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+### 2.  나의 부족한 점은?
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- AI 멘토가 사용자에게 질문을 하고, 사용자는 답변을 제출합니다. AI 멘토는 사용자의 답변을 평가하고 부족한 부분에 대한 추가 질문을 제시하여 사용자의 역량 향상을 지원합니다
+
+### 3.  랭킹 시스템
+
+- 사용자들 간에 학습 또는 멘토링 성과를 비교하고 경쟁할 수 있는 시스템입니다. 자신의 성과를 토대로 순위를 얻게 되며, 학습 동기부여를 위한 기능입니다.
+
+### 3.  학습 리포트
+
+- 자신이 공부한 내용을 확인하고 학습 진행 상황을 파악할 수 있도록 도와줍니다. 그리고, 부족한 부분에 대한 점에 대한 키워드를 제공합니다.
