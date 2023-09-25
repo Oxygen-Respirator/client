@@ -2,9 +2,10 @@ import { useRecoilValue } from "recoil";
 import { langListAtom } from "@/atom/langList";
 
 import Table from "@/components/Table";
-import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useGetRankListQuery } from "@/queryHook/useRankQuery";
+
+import * as S from "./style";
 
 export default function Rank() {
   const [curLang, setCurLang] = useState<number>(0);
@@ -34,30 +35,20 @@ export default function Rank() {
 
   return (
     <>
-      <LangBox>
-        <LangSelect onChange={onChangeLangSelect} value={curLang}>
+      <S.LangBox>
+        <S.LangSelect onChange={onChangeLangSelect} value={curLang}>
           {langList.map(({ id, name }) => (
-            <LangOption key={id} value={id}>
+            <S.LangOption key={id} value={id}>
               {name}
-            </LangOption>
+            </S.LangOption>
           ))}
-        </LangSelect>
+        </S.LangSelect>
         {/* <RankP>{thisWeekRender()}</RankP> */}
-      </LangBox>
+      </S.LangBox>
       <Table tableData={rnakList} columns={columns} pagination={false} />
     </>
   );
 }
-
-const LangBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-`;
-
-const LangSelect = styled.select``;
-
-const LangOption = styled.option``;
 
 // const RankP = styled.p`
 //   text-align: right;
