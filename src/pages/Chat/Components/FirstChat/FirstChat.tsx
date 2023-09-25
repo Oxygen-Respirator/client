@@ -1,5 +1,5 @@
 import { useRecoilValue, useRecoilState } from "recoil";
-import styled from "styled-components";
+import * as S from "./style.ts";
 
 import { groupIdState } from "@/atom/chat";
 import { langListAtom } from "@/atom/langList";
@@ -11,17 +11,17 @@ const FirstChat = () => {
   const [groupId, setGroupId] = useRecoilState(groupIdState);
 
   return (
-    <AIContainrer>
-      <Row>
-        <ProfileImgWrap>
+    <S.AIContainrer>
+      <S.Row>
+        <S.ProfileImgWrap>
           <AiProfile />
-        </ProfileImgWrap>
+        </S.ProfileImgWrap>
         <p>AI 면접 멘토</p>
-      </Row>
-      <AIMessageWrap>모의면접 학습할 주제를 선택해주세요.</AIMessageWrap>
-      <SubjectItemWrap>
+      </S.Row>
+      <S.AIMessageWrap>모의면접 학습할 주제를 선택해주세요.</S.AIMessageWrap>
+      <S.SubjectItemWrap>
         {langList.map(({ id, name }) => (
-          <SubjectItem
+          <S.SubjectItem
             key={id}
             onClick={() => {
               setGroupId(id);
@@ -29,72 +29,11 @@ const FirstChat = () => {
             $groupId={!!(groupId === id)}
           >
             {name}
-          </SubjectItem>
+          </S.SubjectItem>
         ))}
-      </SubjectItemWrap>
-    </AIContainrer>
+      </S.SubjectItemWrap>
+    </S.AIContainrer>
   );
 };
 
 export default FirstChat;
-
-const SubjectItemWrap = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
-  margin-top: 1.5rem;
-  max-width: 800px;
-  @media screen and (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-const SubjectItem = styled.button<{ $groupId: boolean }>`
-  padding: 0.5rem 1rem;
-  border: 1px solid
-    ${({ theme: { color }, $groupId }) =>
-      $groupId ? color.mainColor : color.borderColor};
-  color: ${({ theme: { color }, $groupId }) => $groupId && color.mainColor};
-  border-radius: 10px;
-  font-weight: bold;
-  width: 130px;
-  @media screen and (max-width: 768px) {
-    width: 100px;
-    padding: 0.5rem;
-  }
-`;
-
-const AIContainrer = styled.div`
-  margin-bottom: 2rem;
-`;
-
-const Row = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-`;
-
-const AIMessageWrap = styled.div`
-  width: 30%;
-  min-width: 470px;
-  padding: 1rem 2rem;
-  background-color: ${({ theme: { color } }) => color.subColor};
-  border-radius: 0.75rem 0.75rem 0.75rem 0;
-  line-height: 180%;
-  margin-top: 1.5rem;
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    min-width: 100%;
-  }
-`;
-const ProfileImgWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 35px;
-  height: 35px;
-  border-radius: 100%;
-  overflow: hidden;
-  background-color: ${({ theme: { color } }) => color.mainColor};
-`;
