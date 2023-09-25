@@ -10,7 +10,7 @@ const CategorySelect = () => {
 
   return (
     <S.SubjectItemWrap>
-      {langList?.map(({ id, name }) => {
+      {langList.map(({ id, name }) => {
         const coinCideId = !!(groupId === id);
         return (
           <S.SubjectItem
