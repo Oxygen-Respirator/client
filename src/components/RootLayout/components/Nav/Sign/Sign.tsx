@@ -1,12 +1,5 @@
 import { SetStateAction, useEffect, useState } from "react";
-import {
-  SignButton,
-  SignForm,
-  SignH2,
-  SignInput,
-  SignP,
-  SignWrap,
-} from "./style";
+import * as S from "./style";
 
 import { AxiosError } from "axios";
 import {
@@ -140,48 +133,48 @@ export default function Sign({
   }
 
   return (
-    <SignWrap>
-      <SignForm onSubmit={onSubmit}>
+    <S.SignWrap>
+      <S.SignForm onSubmit={onSubmit}>
         <div>
-          <SignH2>환영합니다!</SignH2>
-          <SignP>회원이 되면 모든 서비스를 이용하실 수 있습니다.</SignP>
+          <S.SignH2>환영합니다!</S.SignH2>
+          <S.SignP>회원이 되면 모든 서비스를 이용하실 수 있습니다.</S.SignP>
         </div>
-        <SignInput
+        <S.SignInput
           onChange={onChangeInput("userNickname")}
           placeholder="닉네임 (영문 + 숫자 10자리)"
           $signIn={isInOpen}
           value={register.userNickname}
           type="text"
         />
-        <SignInput
+        <S.SignInput
           onChange={onChangeInput("userId")}
           placeholder="아이디 (영문 + 숫자 12자리)"
           value={register.userId}
           type="text"
         />
-        <SignInput
+        <S.SignInput
           onChange={onChangeInput("userPw")}
           placeholder="비밀번호 (영문 + 숫자 12자리)"
           value={register.userPw}
           type="password"
         />
-        <SignInput
+        <S.SignInput
           onChange={onChangeInput("confirmPw")}
           placeholder="비밀번호 확인 (영문 + 숫자 12자리)"
           $signIn={isInOpen}
           value={register.confirmPw}
           type="password"
         />
-        <SignButton
+        <S.SignButton
           $isDisable={isUpOpen ? isUpDisable : isInDisable}
           disabled={isUpOpen ? isUpDisable : isInDisable}
         >
           {isInOpen ? "로그인하기" : "가입하기"}
-        </SignButton>
-        <SignButton $reverse={true} type="button" onClick={onClickNotSubBtn}>
+        </S.SignButton>
+        <S.SignButton $reverse={true} type="button" onClick={onClickNotSubBtn}>
           {isInOpen ? "회원가입" : "다음에 할래요"}
-        </SignButton>
-      </SignForm>
-    </SignWrap>
+        </S.SignButton>
+      </S.SignForm>
+    </S.SignWrap>
   );
 }

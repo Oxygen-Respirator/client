@@ -1,9 +1,9 @@
-import styled from "styled-components";
 import Logo from "../../../../../public/logo.svg";
 import chatApis from "@/apis/chatApis";
 import { useQuery } from "@tanstack/react-query";
 import { useSetRecoilState } from "recoil";
 import { groupIdState } from "@/atom/chat";
+import * as S from "./style";
 
 const SideBar = () => {
   const setGroupId = useSetRecoilState(groupIdState);
@@ -28,12 +28,12 @@ const SideBar = () => {
     return subject ? subject.id : null;
   }
   return (
-    <SideBarContainer>
+    <S.SideBarContainer>
       <div>
-        <TitleText>히스토리</TitleText>
+        <S.TitleText>히스토리</S.TitleText>
         {isChatListData &&
           chatListData.map(({ langGroupName }) => (
-            <Myinfo
+            <S.Myinfo
               key={langGroupName}
               type="button"
               onClick={() => {
@@ -47,39 +47,12 @@ const SideBar = () => {
             >
               <img src={Logo} />
               {langGroupName} 모의면접
-            </Myinfo>
+            </S.Myinfo>
           ))}
         {chatListData?.length === 0 && <p>대화기록이 없습니다.</p>}
       </div>
-    </SideBarContainer>
+    </S.SideBarContainer>
   );
 };
 
 export default SideBar;
-
-const TitleText = styled.p`
-  margin-top: 1rem;
-  font-weight: bold;
-`;
-
-const SideBarContainer = styled.div`
-  width: 15%;
-  min-width: 220px;
-  height: 100%;
-  background-color: ${({ theme: { color } }) => color.subColor};
-  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
-  padding: 2rem;
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const Myinfo = styled.button`
-  width: 100%;
-  margin-top: 1rem;
-  padding: 1rem;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
