@@ -41,15 +41,23 @@ export default function Sign({
         setRegister(prev => ({ ...prev, [name]: value }));
         return;
       }
-      if (name === "userNickname" && register[name].length > 7) {
+      if (name === "userNickname") {
+        const nickRegex = /^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ]+$/;
+        const isNickValid = nickRegex.test(value);
+        if (isNickValid) {
+          if (value.length > 10) {
+            return;
+          }
+          setRegister(prev => ({ ...prev, [name]: value }));
+        }
         return;
       }
-      if (register[name].length > 11) {
+      if (value.length > 12) {
         return;
       }
+
       const regex = /^[a-zA-Z0-9]+$/;
       const isValid = regex.test(value);
-
       if (isValid) {
         setRegister(prev => ({ ...prev, [name]: value }));
       }
@@ -76,7 +84,12 @@ export default function Sign({
         },
       );
     } else {
-      const { userPw } = register;
+      const _nickRegex = /^[a-zA-Z0-9가-힣]+$/;
+      const _isNickValid = _nickRegex.test(userNickname);
+      if (!_isNickValid) {
+        alert("닉네임이 올바른 형식이 아닙니다.");
+        return;
+      }
 
       if (userPw !== confirmPw) {
         alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
