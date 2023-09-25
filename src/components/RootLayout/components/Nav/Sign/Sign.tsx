@@ -141,7 +141,7 @@ export default function Sign({
         </div>
         <S.SignInput
           onChange={onChangeInput("userNickname")}
-          placeholder="닉네임 (영문 + 숫자 10자리)"
+          placeholder="닉네임 (영문 | 숫자 | 한글 10자리)"
           $signIn={isInOpen}
           value={register.userNickname}
           type="text"
