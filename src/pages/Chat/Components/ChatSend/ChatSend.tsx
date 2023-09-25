@@ -10,7 +10,7 @@ import chatApis from "@/apis/chatApis";
 const ChatSend = () => {
   const groupId = useRecoilValue(groupIdState);
   const { remainAnswerCount, maxAnswerCount } = useRecoilValue(userInfoAtom);
-  const [message, setMessage] = useState<string | null>(null);
+  const [message, setMessage] = useState<string>("");
 
   const isAnswerCount = !!(remainAnswerCount === 0);
 
@@ -34,15 +34,16 @@ const ChatSend = () => {
   const handleSendMessage = () => {
     if (message) {
       postMessageMutation.mutateAsync({ groupId, message });
-
-      setMessage(null);
+      setMessage("");
+    } else {
+      alert("텍스트를 입력해주세요");
     }
   };
   return (
     <S.ChatWrap>
       <S.CustomTextarea
         disabled={isAnswerCount}
-        value={message || ""}
+        value={message}
         onChange={e => setMessage(e.target.value)}
         placeholder={isAnswerText}
       />
