@@ -26,10 +26,6 @@ export const SubjectItem = styled.button<{ $groupId: boolean }>`
   }
 `;
 
-export const AIContainrer = styled.div`
-  margin-bottom: 2rem;
-`;
-
 export const Row = styled.div`
   display: flex;
   align-items: center;

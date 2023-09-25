@@ -1,10 +1,10 @@
 import { Fragment, useEffect, useRef } from "react";
 import * as S from "./style.ts";
-import { AiProfile } from "@/components/Svg";
 import chatApis from "@/apis/chatApis";
 import { useQuery } from "@tanstack/react-query";
 import { useRecoilValue } from "recoil";
 import { groupIdState } from "@/atom/chat";
+import AIMessage from "../AIMessage/AIMessage.tsx";
 
 const ChatList = () => {
   const messageEndRef = useRef<HTMLDivElement | null>(null);
@@ -31,37 +31,13 @@ const ChatList = () => {
             return (
               <Fragment key={id}>
                 {index === 0 && <S.DateText>{createdAt}</S.DateText>}
-
-                {answer && (
-                  <S.AIContainrer>
-                    <S.Row>
-                      <S.ProfileImgWrap>
-                        <AiProfile />
-                      </S.ProfileImgWrap>
-                      <p>AI 면접 멘토</p>
-                    </S.Row>
-
-                    <S.AIMessageWrap>{answer}</S.AIMessageWrap>
-                  </S.AIContainrer>
-                )}
-
+                {answer && <AIMessage answer={answer} />}
                 {userMessage && (
                   <S.RowEnd>
                     <S.MyMessageWrap>{userMessage}</S.MyMessageWrap>
                   </S.RowEnd>
                 )}
-                {tailQuestion && (
-                  <S.AIContainrer>
-                    <S.Row>
-                      <S.ProfileImgWrap>
-                        <AiProfile />
-                      </S.ProfileImgWrap>
-                      <p>AI 면접 멘토</p>
-                    </S.Row>
-
-                    <S.AIMessageWrap>{tailQuestion}</S.AIMessageWrap>
-                  </S.AIContainrer>
-                )}
+                {tailQuestion && <AIMessage answer={tailQuestion} />}
               </Fragment>
             );
           },

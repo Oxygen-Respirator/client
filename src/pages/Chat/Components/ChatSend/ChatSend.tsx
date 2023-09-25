@@ -9,7 +9,15 @@ import chatApis from "@/apis/chatApis";
 
 const ChatSend = () => {
   const groupId = useRecoilValue(groupIdState);
+  const { remainAnswerCount, maxAnswerCount } = useRecoilValue(userInfoAtom);
   const [message, setMessage] = useState<string | null>(null);
+
+  const isAnswerCount = !!(remainAnswerCount === 0);
+
+  const isAnswerText =
+    remainAnswerCount === 0
+      ? "남은 답변 횟수가 없습니다."
+      : "텍스트를 입력해주세요";
 
   const queryClient = useQueryClient();
 
@@ -23,8 +31,6 @@ const ChatSend = () => {
     },
   );
 
-  const { remainAnswerCount, maxAnswerCount } = useRecoilValue(userInfoAtom);
-
   const handleSendMessage = () => {
     if (message) {
       postMessageMutation.mutateAsync({ groupId, message });
@@ -35,14 +41,10 @@ const ChatSend = () => {
   return (
     <S.ChatWrap>
       <S.CustomTextarea
-        disabled={!!(remainAnswerCount === 0)}
+        disabled={isAnswerCount}
         value={message || ""}
         onChange={e => setMessage(e.target.value)}
-        placeholder={
-          remainAnswerCount === 0
-            ? "남은 답변 횟수가 없습니다."
-            : "텍스트를 입력해주세요"
-        }
+        placeholder={isAnswerText}
       />
       <S.ChatSendBtnWrap>
         <p>
